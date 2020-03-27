@@ -1,6 +1,6 @@
-[![Photo](https://github.com/raychang2017/f2e-portfolio/blob/master/13%20-%20%E7%94%A8%20Vue%20%E5%92%8C%20API%20%E5%81%9A%E4%B8%80%E5%80%8B%E6%A9%AB%E5%90%91%E6%8D%B2%E5%8B%95%E9%9B%BB%E5%BD%B1%E8%B3%BC%E7%89%A9%E9%A0%81%E9%9D%A2/img/%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%202020-03-27%20%E4%B8%8B%E5%8D%888.35.08.png?raw=true)](https://dribbble.com/raychangdesign)
-[![Photo](https://github.com/raychang2017/f2e-portfolio/blob/master/13%20-%20%E7%94%A8%20Vue%20%E5%92%8C%20API%20%E5%81%9A%E4%B8%80%E5%80%8B%E6%A9%AB%E5%90%91%E6%8D%B2%E5%8B%95%E9%9B%BB%E5%BD%B1%E8%B3%BC%E7%89%A9%E9%A0%81%E9%9D%A2/img/%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%202020-03-27%20%E4%B8%8B%E5%8D%888.36.11.png?raw=true)](https://dribbble.com/raychangdesign)
-[![Photo](https://github.com/raychang2017/f2e-portfolio/blob/master/13%20-%20%E7%94%A8%20Vue%20%E5%92%8C%20API%20%E5%81%9A%E4%B8%80%E5%80%8B%E6%A9%AB%E5%90%91%E6%8D%B2%E5%8B%95%E9%9B%BB%E5%BD%B1%E8%B3%BC%E7%89%A9%E9%A0%81%E9%9D%A2/img/%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%202020-03-27%20%E4%B8%8B%E5%8D%888.37.07.png?raw=true)](https://dribbble.com/raychangdesign)
+[![Photo](https://raw.githubusercontent.com/raychang2017/f2e-portfolio/master/13%20-%20%E7%94%A8%20Vue%20%E5%92%8C%20API%20%E5%81%9A%E4%B8%80%E5%80%8B%E6%A9%AB%E5%90%91%E6%8D%B2%E5%8B%95%E9%9B%BB%E5%BD%B1%E8%B3%BC%E7%89%A9%E9%A0%81%E9%9D%A2/img/%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%202020-03-27%20%E4%B8%8B%E5%8D%888.35.08.png)](https://dribbble.com/raychangdesign)
+[![Photo](https://raw.githubusercontent.com/raychang2017/f2e-portfolio/master/13%20-%20%E7%94%A8%20Vue%20%E5%92%8C%20API%20%E5%81%9A%E4%B8%80%E5%80%8B%E6%A9%AB%E5%90%91%E6%8D%B2%E5%8B%95%E9%9B%BB%E5%BD%B1%E8%B3%BC%E7%89%A9%E9%A0%81%E9%9D%A2/img/%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%202020-03-27%20%E4%B8%8B%E5%8D%888.36.11.png)](https://dribbble.com/raychangdesign)
+[![Photo](https://raw.githubusercontent.com/raychang2017/f2e-portfolio/master/13%20-%20%E7%94%A8%20Vue%20%E5%92%8C%20API%20%E5%81%9A%E4%B8%80%E5%80%8B%E6%A9%AB%E5%90%91%E6%8D%B2%E5%8B%95%E9%9B%BB%E5%BD%B1%E8%B3%BC%E7%89%A9%E9%A0%81%E9%9D%A2/img/%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%202020-03-27%20%E4%B8%8B%E5%8D%888.37.07.png)](https://dribbble.com/raychangdesign)
 
 # Horizontal Scrolling Theater with Vue.js
 
@@ -13,4 +13,4 @@
 - 使用 Vue `@wheel` 事件，及借助 [GSAP TweenMax](https://greensock.com/tweenmax/) 之力，實現橫向捲軸電影頁面、加入購物車時的電影封面閃現動畫
 - 使用 Vue `watch` 偵測購物車元素，當加入電影至購物車、購物車 icon 旁的數字改變時，觸發 icon 縮小 20% 的互動效果
 - 抓取電影位置並利用增減 HTML class，做出「回到最前」互動按鈕
-- [線上版]() / [CodePen 連結](https://codepen.io/raychang2017/full/OJVrMqJ)
+- [線上版](https://raychang2017.github.io/horizontal-scrolling-theater/) / [CodePen 連結](https://codepen.io/raychang2017/full/OJVrMqJ)
