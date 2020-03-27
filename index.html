@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Horizon-scroll Theater with Vue.js</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <div id="app">
+    <h1 class="title">Vue.js Theater</h1>
+    <!-- .movie detects mouse scroll events -->
+    <section class="movie" @wheel.prevent="scroll">
+      <section class="cards" :class="{cartOpen: cartOpen}">
+        <article class="card" v-for="movie in movies">
+          <!-- Card left -->
+          <div class="card-left">
+            <div class="cover" :style="getBackgroundSetting(movie.cover)"></div>
+          </div>
+          <!-- Card right -->
+          <div class="card-right">
+            <h2>{{movie.name}}</h2>
+            <h4>{{movie.genre}}</h4>
+            <p>{{truncate(movie.description, 95)}}</p>
+            <div class="price">$ {{thousandFormat(movie.price)}}</div>
+            <button class="add" @click="addToCart(movie, $event)">Add to cart</button>
+          </div>
+        </article>
+      </section>
+    </section>
+
+    <button class="arrow-left" :class="{show: arrowLeftShow}"
+                               @click="moveToTop">←</button>
+
+    <div class="moving-cover" :style="getBackgroundSetting(currentMovie.cover)"
+                               v-if="currentMovie"></div>
+
+    <div class="cart" @click="cartOpen=!cartOpen">
+      <ion-icon name="cart-outline" class="cart-icon"></ion-icon>
+      <span>{{cart.length}}</span>
+    </div>
+
+    <section class="cart-page" :class="{cartOpen: cartOpen}">
+      <section class="panel">
+        <h2>My Movie Cart</h2>
+        <h3 class="message" v-if="!cart.length">You didn't add any movie in the cart.</h3>
+        <ul>
+          <li v-for="(movie, movieId) in cart">
+            <div class="remove" @click="cart.splice(movieId, 1)">✕</div>
+            <div class="thumbnail" :style="getBackgroundSetting(movie.cover)"></div>
+            <h3 class="name">{{movie.name}}</h3>
+            <div class="price">$ {{thousandFormat(movie.price)}}</div>
+          </li>
+        </ul>
+        <hr>
+        <h2 class="total-price">$ {{thousandFormat(totalPrice)}}</h2>
+      </section>
+    </section>
+  </div>
+
+  <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.common.dev.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
+  <script src="./js/script.js"></script>
+</body>
+</html>
