@@ -35,8 +35,8 @@
     <div class="moving-cover" :style="getBackgroundSetting(currentMovie.cover)"
                                v-if="currentMovie"></div>
 
-    <div class="cart" @click="cartOpen=!cartOpen">
-      <ion-icon name="cart-outline" class="cart-icon"></ion-icon>
+    <div class="cart" @click="cartToggle">
+      <ion-icon :name="cartIcon" class="cart-icon"></ion-icon>
       <span>{{cart.length}}</span>
     </div>
 
