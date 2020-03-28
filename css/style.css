@@ -160,6 +160,7 @@ html, body {
   padding: 5px 10px;
   color: rgba(255, 255, 255, 0.9);
   background-color: #bbb;
+  border: none;
   border-radius: 50px;
   cursor: pointer;
   -webkit-transition: 0.5s;
