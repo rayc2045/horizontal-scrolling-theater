@@ -25,7 +25,8 @@ let vm = new Vue({
 			};
 		},
 		scroll(e) {
-			// console.log(e.delta);
+			// console.log(e)
+			// console.log(e.deltaY);
 			// document.querySelector('.movie').scrollLeft -= e.delta * 30;
 			
 			// 將滑鼠滾動距離作為卡片偏移
@@ -34,12 +35,33 @@ let vm = new Vue({
 			});
 
 			this.showOrHideLeftArrow();
+			this.backToTopOrLast();
 		},
 		showOrHideLeftArrow() {
 			const cardsElLeft = document.querySelector('.cards').style.left.replace('px', '');
 			// console.log(cardsElLeft);
 			if (cardsElLeft < -800) return this.arrowLeftShow = true;
 			this.arrowLeftShow = false ;
+		},
+		backToTopOrLast() {
+			const cardsEl = document.querySelector('.cards');
+			const cardsElLeft = cardsEl.style.left.replace('px', '');
+			const scrollProgress = (Math.round(-cardsElLeft / cardsEl.scrollWidth * 100) / 100) * 100 + '%';
+
+			if (cardsElLeft > 0) {
+				TweenMax.to('.cards', 0.6, {
+					left: 0
+				});
+			}
+
+			// console.log(cardsEl.scrollWidth - -cardsElLeft);
+			// console.log(scrollProgress);
+			
+			if (cardsElLeft < -cardsEl.scrollWidth + 585) {
+				TweenMax.to('.cards', 0.6, {
+					left: -cardsEl.scrollWidth + 585
+				});
+			}
 		},
 		moveToTop() {
 			// window.scrollTo(0,0);
