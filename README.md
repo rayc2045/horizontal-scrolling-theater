@@ -12,5 +12,5 @@
 - 使用 CSS `transform` 屬性做出滑鼠碰觸電影卡片時的上移互動效果
 - 使用 Vue `@wheel` 事件，及借助 [GSAP TweenMax](https://greensock.com/tweenmax/) 之力，實現橫向捲軸電影頁面、加入購物車時的電影封面閃現動畫
 - 使用 Vue `watch` 偵測購物車元素，當加入電影至購物車、購物車 icon 旁的數字改變時，觸發 icon 縮小 20% 的互動效果
-- 抓取電影位置並利用增減 HTML class，做出「回到最前」互動按鈕
+- 抓取頁面位置並利用增減 HTML Class，做出「回到最前」互動按鈕
 - [線上版](https://raychang2017.github.io/horizontal-scrolling-theater/) / [CodePen 連結](https://codepen.io/raychang2017/full/OJVrMqJ)
