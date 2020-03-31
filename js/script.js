@@ -6,6 +6,7 @@ let vm = new Vue({
 		currentMovie: null,
 		cartOpen: false,
 		cartIcon: 'cart-outline',
+		addingToCartBlock: false,
 		arrowLeftShow: false
 	},
 	created() {
@@ -17,7 +18,9 @@ let vm = new Vue({
 				this.movies = res.data;
 				console.log(`電影總計 ${this.movies.length} 部`);
 			})
-			.catch();
+			.catch((err) => {
+				console.log(err);
+			});
 	},
 	methods: {
 		getBackgroundSetting(url) {
@@ -94,9 +97,19 @@ let vm = new Vue({
 		},
 		cartToggle() {
 			this.cartOpen = !this.cartOpen;
-			this.cartOpen ? (this.cartIcon = 'cart') : (this.cartIcon = 'cart-outline');
+			
+			if (this.cartOpen) {
+				this.cartIcon = 'cart';
+				this.arrowLeftShow = false;
+			} else {
+				this.cartIcon = 'cart-outline';
+				this.arrowLeftShow = true;
+			}
 		},
 		addToCart(movie, e) {
+			if (this.addingToCartBlock) return;
+
+			this.addingToCartBlock = true;
 			this.currentMovie = movie;
 
 			// After Vue's component being updated, then begin Vue animation
@@ -111,6 +124,10 @@ let vm = new Vue({
 				setTimeout(() => {
 					this.cart.push(movie);
 				}, 600);
+
+				setTimeout(() => {
+					this.addingToCartBlock = false;
+				}, 1000);
 			});
 		}
 	},
