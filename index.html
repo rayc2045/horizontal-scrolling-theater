@@ -42,9 +42,9 @@
 
     <section class="cart-page" :class="{cartOpen: cartOpen}">
       <section class="panel">
-        <h2>My Movie Cart</h2>
-        <h3 class="message" v-if="!cart.length">You didn't add any movie in the cart.</h3>
+        <h2 v-if="cart.length">My Movie Cart</h2>
         <ul>
+          <h3 class="message" v-if="!cart.length">You didn't add any movie in the cart.</h3>
           <li v-for="(movie, movieId) in cart">
             <div class="remove" @click="cart.splice(movieId, 1)">✕</div>
             <div class="thumbnail" :style="getBackgroundSetting(movie.cover)"></div>
@@ -52,8 +52,8 @@
             <div class="price">$ {{thousandFormat(movie.price)}}</div>
           </li>
         </ul>
-        <hr>
-        <h2 class="total-price">$ {{thousandFormat(totalPrice)}}</h2>
+        <hr v-if="cart.length">
+        <h2 class="total-price" v-if="cart.length">$ {{thousandFormat(totalPrice)}}</h2>
       </section>
     </section>
   </div>
