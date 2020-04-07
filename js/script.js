@@ -81,20 +81,6 @@ let vm = new Vue({
 				this.showOrHideLeftArrow();
 			}, 500);
 		},
-		// 縮短文本
-		truncate(str, maxLength) {
-			return str.length > maxLength ? str.slice(0, maxLength - 1) + ' ...' : str;
-		},
-		thousandFormat(num) {
-			num += '';
-			if (!num.includes('.')) num += '.';
-			return num
-				.replace(/(\d)(?=(\d{3})+\.)/g, function($0, $1) {
-					return $1 + ',';
-				})
-				.replace(/\.$/, '');
-			// return (num).toLocaleString('en-US'); // 導致小數點後只被保留三位
-		},
 		cartToggle() {
 			this.cartOpen = !this.cartOpen;
 			
@@ -112,7 +98,7 @@ let vm = new Vue({
 			this.addingToCartBlock = true;
 			this.currentMovie = movie;
 
-			// After Vue's component being updated, then begin Vue animation
+			// After Vue's component being updated, then start Vue animation
 			this.$nextTick(() => {
 				TweenMax.from('.moving-cover', 0.8, {
 					left: $(e.target).offset().left,
@@ -129,6 +115,23 @@ let vm = new Vue({
 					this.addingToCartBlock = false;
 				}, 1000);
 			});
+		},
+		// 縮短文本
+		truncate(str, maxLength) {
+			return str.length > maxLength ? str.slice(0, maxLength - 1) + ' ...' : str;
+		},
+		thousandFormat(num) {
+			num += '';
+			if (!num.includes('.')) num += '.';
+			return num
+				.replace(/(\d)(?=(\d{3})+\.)/g, function($0, $1) {
+					return $1 + ',';
+				})
+				.replace(/\.$/, '');
+			// return (num).toLocaleString('en-US'); // 導致小數點後只被保留三位
+		},
+		organizeDataDuplicatedObject() {
+			
 		}
 	},
 	computed: {
@@ -138,7 +141,7 @@ let vm = new Vue({
 	},
 	watch: {
 		cart() {
-			TweenMax.from('.cart', 0.3, {
+			TweenMax.from('.cart-icon', 0.3, {
 				scale: 0.8
 			});
 		}
