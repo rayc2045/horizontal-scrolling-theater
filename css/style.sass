@@ -36,6 +36,14 @@ $transitionTime: 0.5s
   /* offset-x | offset-y | blur-radius | spread-radius | color */
   box-shadow: 0 5px 25px 5px rgba(black, 0.2)
 
+@keyframes demoScrolling
+  0%
+    left: 0
+  50%
+    left: -250px
+  100%
+    left: 0
+
 ::-webkit-scrollbar
   width: 8px
 ::-webkit-scrollbar-track // Track
@@ -89,6 +97,8 @@ html, body
   &.cartOpen
     // transform: scale(0.8)
     filter: blur(10px)
+  &.demo
+    animation: demoScrolling 1.8s ease-out
     
 .card
   +size(484px, auto)
