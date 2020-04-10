@@ -21,16 +21,6 @@ let vm = new Vue({
 			.catch((err) => {
 				console.log(err);
 			});
-
-		// Showing demo
-		setTimeout(() => {
-			const cardsEl = document.querySelector('.cards');
-			cardsEl.classList.add('demo');
-
-			setTimeout(() => {
-				cardsEl.classList.remove('demo');
-			}, 2000)
-		}, 1000)
 	},
 	methods: {
 		getBackgroundSetting(url) {

@@ -118,6 +118,8 @@ html, body {
 .cards.demo {
   -webkit-animation: demoScrolling 1.8s ease-out;
           animation: demoScrolling 1.8s ease-out;
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
 }
 
 .card {
