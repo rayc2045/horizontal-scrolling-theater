@@ -9,6 +9,7 @@
 - 使用預處理器 Sass 撰寫 CSS，使用 Vue 做網頁架構
 - 將自己收藏的 40 部藍光電影製作成 API json 檔，並透過 axios 做非同步資料請求
 - 使用 JS `str.slice()` 縮減電影描述至 95 字
+- 電影卡片使用淺灰底色，持久凝視不眩光
 - 開頭加入 CSS `@keyframes` 捲動提示動畫，並使用 `transform` 屬性做出滑鼠碰觸電影卡片時的上移互動效果，讓使用體驗更加順暢
 - 使用 Vue `@wheel` 事件，及借助 [GSAP TweenMax](https://greensock.com/tweenmax/) 之力，實現橫向捲軸電影頁面，以及將商品加入購物車的動畫
 - 使用 Vue `watch` 偵測購物車元素，當加入商品至購物車時，觸發 icon 縮小 20% 的互動效果
