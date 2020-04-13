@@ -38,8 +38,6 @@ $transitionTime: 0.5s
 
 @keyframes demoScrolling
   0%
-    left: 0
-  50%
     left: -250px
   100%
     left: 0
@@ -92,14 +90,13 @@ html, body
   height: 100%
   margin-left: 20vw
   position: relative // Use JS changing its' left/right distance to move cards
-  left: 0 // Initial value
+  // left: -250px // Initial value
+  animation: demoScrolling 2s ease-out both // 動畫停留在結束時
+  animation-delay: 0.5s
   transition: $transitionTime, left 0s
   &.cartOpen
     // transform: scale(0.8)
     filter: blur(10px)
-  &.demo
-    animation: demoScrolling 1.8s ease-out
-    animation-delay: 1s
     
 .card
   +size(484px, auto)

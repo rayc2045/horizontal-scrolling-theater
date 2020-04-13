@@ -11,7 +11,7 @@
     <h1 class="title">Vue.js Theater</h1>
     <!-- .movie detects mouse scroll events -->
     <section class="movie" @wheel.prevent="scroll">
-      <section class="cards demo" :class="{cartOpen: cartOpen}">
+      <section class="cards" :class="{cartOpen: cartOpen}">
         <article class="card" v-for="movie in movies">
           <!-- Card left -->
           <div class="card-left">
