@@ -65,6 +65,7 @@ html, body
   font-family: 'Roboto', sans-serif
   background-color: $black
   scroll-behavior: smooth
+  overflow: hidden
 
 #app
   +size(100%)
@@ -91,9 +92,9 @@ html, body
   margin-left: 20vw
   position: relative // Use JS changing its' left/right distance to move cards
   // left: -250px // Initial value
-  animation: demoScrolling 2s ease-out both // 動畫停留在結束時
   animation-delay: 0.5s
   transition: $transitionTime, left 0s
+  animation: demoScrolling 2s ease-out
   &.cartOpen
     // transform: scale(0.8)
     filter: blur(10px)
