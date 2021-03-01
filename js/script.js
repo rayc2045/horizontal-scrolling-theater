@@ -12,7 +12,7 @@ let vm = new Vue({
 	created() {
 		axios
 			.get(
-				'https://raw.githubusercontent.com/raychang2017/f2e-portfolio/master/13%20-%20%E7%94%A8%20Vue%20%E5%92%8C%20API%20%E5%81%9A%E4%B8%80%E5%80%8B%E6%A9%AB%E5%90%91%E6%8D%B2%E5%8B%95%E9%9B%BB%E5%BD%B1%E8%B3%BC%E7%89%A9%E9%A0%81%E9%9D%A2/data/movie.json'
+				'https://raw.githubusercontent.com/rayc2045/horizontal-scrolling-theater/master/src/assets/data/movie.json'
 			)
 			.then((res) => {
 				this.movies = res.data;
