@@ -56,6 +56,20 @@
     "price": 998
   },
   {
+    "name": "銀翼殺手 2049",
+    "genre": "動作、科幻",
+    "cover": "https://raw.githubusercontent.com/rayc2045/horizontal-scrolling-theater/master/src/assets/img/%E9%8A%80%E7%BF%BC%E6%AE%BA%E6%89%8B_2049.jpg",
+    "description": "科幻電影的聖經之作【銀翼殺手】續集，故事描述在未來 2049 年時，複製人與真實人類的界線越趨模糊難分，引發正反兩面的一連串影響。銀翼殺手 K 為阻止現況演變成不可挽救的局面，因此踏上尋找掌握重要線索的關鍵人物銀翼殺手瑞克戴克之路，欲挖掘隱藏三十年的事實真相。",
+    "price": 998
+  },
+  {
+    "name": "2001 太空漫遊",
+    "genre": "科幻、劇情",
+    "cover": "https://raw.githubusercontent.com/rayc2045/horizontal-scrolling-theater/master/src/assets/img/2001_%E5%A4%AA%E7%A9%BA%E6%BC%AB%E9%81%8A.jpg",
+    "description": "西元 2001 年，人類已經能夠征服太空，並在月球的太空殖民地發現了顯然不屬於月球的黑石，竟然發出強力的無線電波，直向無垠的太空而去，科學家判斷是其他銀河系的高等生物所提供的訊息，於是派遣探險太空船前往，船內共有兩位太空人及一部叫做赫爾9000型的超級電腦，在漫長的太空旅途中，赫爾竟然想取得太空船的控制權，並殺害其中一位太空人…",
+    "price": 888
+  },
+  {
     "name": "星際效應",
     "genre": "科幻、劇情",
     "cover": "https://raw.githubusercontent.com/rayc2045/horizontal-scrolling-theater/master/src/assets/img/%E6%98%9F%E9%9A%9B%E6%95%88%E6%87%89.jpg",
@@ -119,6 +133,13 @@
     "price": 798
   },
   {
+    "name": "瘋狂理髮師",
+    "genre": "懸疑、驚悚、劇情",
+    "cover": "https://raw.githubusercontent.com/rayc2045/horizontal-scrolling-theater/master/src/assets/img/%E7%98%8B%E7%8B%82%E7%90%86%E9%AB%AE%E5%B8%AB.jpg",
+    "description": "原本在倫敦開設理髮院的班哲明巴克，因托賓法官覬覦其妻美色，而被誣陷並流放異鄉長達 15 年。返回倫敦後，他誓言要為此冤獄和失去下落的妻女報仇，於是決定改名史威尼陶德，一步步展開他的報復計畫。陶德回到舊居，在破爛的肉餅店樓上重新經營理髮生意來伺機報復。",
+    "price": 798
+  },
+  {
     "name": "紅龍",
     "genre": "恐怖、懸疑、犯罪",
     "cover": "https://raw.githubusercontent.com/rayc2045/horizontal-scrolling-theater/master/src/assets/img/%E7%B4%85%E9%BE%8D.jpg",
@@ -152,6 +173,27 @@
     "cover": "https://raw.githubusercontent.com/rayc2045/horizontal-scrolling-theater/master/src/assets/img/%E9%9B%99%E9%9D%A2%E4%BA%BA%E9%AD%94_%E7%AC%AC%E4%BA%8C%E5%AD%A3.jpg",
     "description": "本劇根據著名暢銷小說《紅龍》和同名電影改編。威爾是 FBI 的特別調查顧問，也是一名犯罪分析師。為了偵破一起凶殘的連環殺人案，威爾向著名的心理醫生萊克特尋求幫助。在案件調查的過程中，威爾越加依賴萊克特醫生。不過，故事似乎才剛剛開始。",
     "price": 850
+  },
+  {
+    "name": "教父 I",
+    "genre": "犯罪、劇情",
+    "cover": "https://raw.githubusercontent.com/rayc2045/horizontal-scrolling-theater/master/src/assets/img/%E6%95%99%E7%88%B6.jpg",
+    "description": "當年由西西里隻身流浪到美國的唐，步步為營成為黑幫大亨，然而歲月不饒人讓他疲態盡現，所以想將衣缽傳承給兒子。而由於唐堅持不和其它幫派合作毒品買賣，得罪對他心生不滿已久的其它幫派，更對他的家族展開一連串狙殺行動，以致桑尼和麥可的新婚妻子遭致殺害，而唐竟姑息此事，不願讓事情越演越烈。身體精神狀況不如從前的唐，與孫兒嬉戲時遏然過世，逃亡在外的三子麥可得知消息後，毅然返回美國接掌父業，更因而成為黑手黨教父，開始籌畫報仇大業。",
+    "price": 798
+  },
+  {
+    "name": "教父 II",
+    "genre": "犯罪、劇情",
+    "cover": "https://raw.githubusercontent.com/rayc2045/horizontal-scrolling-theater/master/src/assets/img/%E6%95%99%E7%88%B6_2.jpg",
+    "description": "麥可在不斷拓展家族勢力的同時，也一步步展開復仇大業，但他並不滿足國內已擁有的勢力，逐漸將版圖伸向古巴，未料發生革命風暴重挫他的計劃。麥可的不法行徑終於遭到政府調查，他更受到一系列的指控，借助權術的麥克雖然有驚無險的逃脫法律制裁，麥可的妻子凱伊卻再也受不了這種滿佈黑暗血腥的生活，決定墮胎含淚離開麥可，遭受至親背叛與深愛妻子離去的打擊，擁抱金錢與權勢的麥可並未因此獲得幸福...",
+    "price": 798
+  },
+  {
+    "name": "教父 III",
+    "genre": "犯罪、劇情",
+    "cover": "https://raw.githubusercontent.com/rayc2045/horizontal-scrolling-theater/master/src/assets/img/%E6%95%99%E7%88%B6_3.jpg",
+    "description": "麥可已日漸衰老，由於深刻瞭解到縱使宿敵多半已死的死、老的老，但自己終究無法永保家人平安，因而決定將家族企業漂白，杜絕所有非法生意。然而外在環境和年輕一代的野心，卻令麥可的決定一再受挫，其他黑幫家族覬覦柯里昂家族的地位和財勢。而麥可血氣方剛的侄子文森則一心想在黑手黨闖出一片江山，另一方面，麥可的獨生愛女卻愛上了瀟灑的文森，令老爸更增煩惱。麥可能成功脫離黑幫和腥風血雨的過去嗎？柯里昂家族還會面臨什麼磨難和挑戰呢？",
+    "price": 798
   },
   {
     "name": "曼哈頓夜曲",
