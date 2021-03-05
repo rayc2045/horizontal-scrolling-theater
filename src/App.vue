@@ -286,12 +286,12 @@ export default {
   </div>
 
   <section class="cart-page" :class="{ cartOpen: isCartOpen }">
-    <section class="panel">
-      <h2 v-if="cart.data.length">電影購物車</h2>
+    <h3 class="message" v-if="!cart.data.length">
+      你還沒將任何電影加入購物車喔 : (
+    </h3>
+    <section v-if="cart.data.length" class="panel">
+      <h2>電影購物車</h2>
       <ul>
-        <h3 class="message" v-if="!cart.data.length">
-          你還沒將任何電影加入購物車喔 : (
-        </h3>
         <li v-for="(movie, idx) in cart.data" :key="movie.name">
           <div class="remove" @click="removeFromCart(idx)">✕</div>
           <div class="thumbnail" :style="getCoverStyle(movie.cover)"></div>
@@ -310,6 +310,7 @@ export default {
 </template>
 
 <style lang="sass">
+@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css')
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap')
 
 $orange: #f95e5e
@@ -318,34 +319,8 @@ $mediumGrey: #bbb
 $grey: #888
 $darkGrey: #444
 $black: #111
+$coverShadow: 0 5px 25px 5px rgba(black, 0.2) // x, y, blur-radius, spread-radius, color
 $transitionTime: 0.5s
-
-@mixin size($w, $h:$w)
-  width: $w
-  height: $h
-
-@mixin flexLeft
-  display: flex
-  justify-content: flex-start
-  align-items: center
-
-@mixin flexRight
-  display: flex
-  justify-content: flex-end
-  align-items: center
-
-@mixin flexCenter
-  display: flex
-  justify-content: center
-  align-items: center
-
-@mixin fixed($l, $t)
-  position: fixed
-  left: $l
-  top: $t
-
-@mixin boxShadow
-  box-shadow: 0 5px 25px 5px rgba(black, 0.2) // offset-x | offset-y | blur-radius | spread-radius | color
 
 @keyframes demoScrolling
   0%
@@ -359,14 +334,11 @@ $transitionTime: 0.5s
   background-color: transparent
 ::-webkit-scrollbar-thumb // Handle
   background-color: $darkGrey
-  &:hover
-    background-color: $grey
 
 *
   margin: 0
   padding: 0
   box-sizing: border-box
-  vertical-align: center
   outline: none
   appearance: none
   user-select: none
@@ -374,52 +346,54 @@ $transitionTime: 0.5s
 html, body
   height: 100%
   font-family: 'Roboto', sans-serif
-  background-color: $black
   scroll-behavior: smooth
   overflow: hidden
 
 #app
-  +size(100%)
-  display: flex
-  background-color: $black
+  width: 100%
+  height: 100%
+  background: $black
   position: relative
 
 .title
-  +fixed(50px, 50px)
+  margin: 0
+  position: fixed
+  left: 50px
+  top: 50px
   color: white
   font-size: 32px
   font-weight: bold
   pointer-events: none
 
 .movie
-  f1ex: 1
-  +size(100%)
-  +fixed(50%, 50%)
+  width: 100%
+  height: 100%
+  position: fixed
+  left: 50%
+  top: 50%
   transform: translate(-50%, -50%)
 
 .cards
-  margin-left: 20vw
+  margin-left: 20%
   height: 100%
-  +flexLeft
-  position: relative
+  display: flex
+  align-items: center
   transition: $transitionTime, left 0s
   animation: demoScrolling 2s ease-out
   animation-delay: 0.5s
+  position: relative
   &.cartOpen
-    // transform: scale(0.95)
     filter: blur(10px)
 
 .card
   margin: 0 80px
-  padding: 20px
-  +size(484px, auto)
+  padding: 20px 20px
+  width: 484px
   display: inline-flex
   flex-shrink: 0
   background-color: rgba(white, 0.9)
   border-radius: 5px
-  +boxShadow
   transform: translateY(15%)
-  cursor: default
   transition: $transitionTime
   &:hover
     transform: translateY(5px)
@@ -435,9 +409,10 @@ html, body
   // flex: 1
   .cover
     margin-top: -50px
-    +size(198px, 264px)
+    width: 198px
+    height: 264px
     border-radius: 5px
-    +boxShadow
+    box-shadow: $coverShadow
     transition: $transitionTime
 
 .card-right
@@ -447,7 +422,7 @@ html, body
   .name
     color: $darkGrey
   .genre
-    margin: 10px 0
+    margin: 14px 0
     font-weight: normal
     opacity: 0.8
   .description
@@ -462,14 +437,14 @@ html, body
     font-weight: 500
   button
     margin-left: 23px
-    padding: 5px 10px
+    padding: 7px 10px
     font-size: 13px
     color: rgba(white, 0.9)
     background-color: $mediumGrey
     border: none
     border-radius: 50px
     cursor: pointer
-    transition: background-color $transitionTime
+    transition: background-color 0.8s
     &:hover
       color: white
       background-color: $orange
@@ -478,7 +453,8 @@ html, body
       cursor: default
 
 .arrow-left
-  +size(45px)
+  width: 45px
+  height: 45px
   position: fixed
   right: 50px
   bottom: 50px
@@ -498,29 +474,34 @@ html, body
   right: 50px
   top: 50px
 .moving-cover
-  +size(50px, 80px)
+  width: 50px
+  height: 70px
   background-color: #fff
   opacity: 0
 .cart
-  +flexLeft
-  z-index: 1000
-  opacity: 0.7
+  display: flex
+  align-items: center
+  z-index: 999
   color: white
+  opacity: 0.7
   cursor: pointer
   transition: opacity $transitionTime
   &:hover
     opacity: 1
   svg
-    width: 35px
     margin-right: 10px
+    width: 35px
     fill: white
   span
     font-size: 20px
 
 .cart-page
-  +size(100%)
+  width: 100%
+  height: 100%
   position: absolute
-  +flexCenter
+  display: flex
+  justify-content: center
+  align-items: center
   color: $lightGrey
   // background-image: linear-gradient(10deg, $black 0%, $black 50%, transparent 100%)
   background-color: rgba($black, 0.9)
@@ -531,30 +512,26 @@ html, body
     opacity: 1
     pointer-events: initial
 
+.message
+  color: $mediumGrey
+  letter-spacing: 0.5px
+  @media screen and (min-width: 1281px)
+    transform: scale(1.1)
+
 .panel
-  +size(65%)
+  width: 65%
   max-width: 1100px
-  display: flex
-  flex-direction: column
-  justify-content: center
   h2
-    margin: 0
-    margin-bottom: 25px
+    margin-bottom: 30px
   ul
-    padding: 0
-    list-style: none
     // Scrollable window
-    max-height: 80%
+    max-height: 490px
     overflow: hidden auto
-    .message
-      +size(100%)
-      +flexCenter
-      color: $mediumGrey
-      letter-spacing: 0.5px
     li
-      +flexLeft
       padding: 15px 0
       padding-right: 25px
+      display: flex
+      align-items: center
       opacity: 0.8
       border-radius: 5px
       transition: $transitionTime
@@ -566,14 +543,17 @@ html, body
           cursor: pointer
       .remove
         margin: 0 10px
+        display: flex
+        justify-content: center
+        align-items: center
         width: 25px
         height: 70px
-        +flexCenter
         opacity: 0
         transition: $transitionTime
       .thumbnail
-        +size(52.5px, 70px)
         margin-right: 20px
+        width: 50px
+        height: 70px
       .name
         font-size: 17px
         font-weight: normal
@@ -582,9 +562,9 @@ html, body
   hr
     margin: 20px 0
   .total-price
-    +flexRight
     margin: 0
     padding-right: 25px
+    text-align: right
   @media screen and (min-width: 1281px)
     transform: scale(1.1)
 </style>
