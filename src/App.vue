@@ -4,6 +4,7 @@ import { gsap, Power1 } from 'gsap';
 import { computed, nextTick, onMounted, reactive, ref, watch } from 'vue';
 export default {
   setup() {
+    const isTouchDevice = ref('ontouchstart' in document.documentElement);
     const movies = reactive({ data: [] });
     const cart = reactive({ data: [] });
     const currentMovieCover = ref('');
@@ -166,6 +167,7 @@ export default {
     }
 
     return {
+      isTouchDevice,
       movies,
       cart,
       currentMovieCover,
@@ -189,6 +191,12 @@ export default {
 </script>
 
 <template>
+  <section
+    v-if="isTouchDevice"
+    style="width: 100vw; height: 100vh; position: fixed; z-index: 9999; display: flex; justify-content: center; align-items: center; color: #eee; background-color: #222"
+  >
+    網頁不適合透過行動裝置瀏覽喔 : (
+  </section>
   <h1 class="title">Vue.js Theater</h1>
   <section class="movie" @wheel.prevent="horizontalScroll">
     <section class="cards" :class="{ cartOpen: isCartOpen }">
