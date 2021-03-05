@@ -1,4 +1,4 @@
-# Horizontal-scrolling Theater with Vue.js
+# Horizontal Scrolling Theater with Vue.js
 
 [![Photo](https://raw.githubusercontent.com/rayc2045/horizontal-scrolling-theater/master/src/assets/demo/01.png)](https://dribbble.com/raychangdesign)
 [![Photo](https://raw.githubusercontent.com/rayc2045/horizontal-scrolling-theater/master/src/assets/demo/02.png)](https://dribbble.com/raychangdesign)
@@ -23,3 +23,4 @@
   - 使用 Vue 的 `watch` API 監視購物車資料，從購物車新增或移除電影、導致資料更新時，觸發購物車 icon 縮小 20% 的互動效果
 - 在加入購物車的動畫進行時，使用變數作為開關，阻擋期間的複數操作，確保 GSAP 互動效果始終如期運行
 - 開啟購物車畫面而購物車為空，或是刪除電影導致購物車為空時，另外加上倒數計時器，1.6 秒後自動回到主畫面
+- 使用 [Netlify](https://www.netlify.com/) 部署網站 👉 [Horizontal Scrolling Theater](https://vuejs-theater.netlify.app/)
