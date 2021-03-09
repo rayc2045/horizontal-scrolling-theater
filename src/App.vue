@@ -1,8 +1,16 @@
 <script>
+import Cards from '@/components/Cards';
+import CartPage from '@/components/CartPage';
 import axios from 'axios';
-import { gsap, Power1 } from 'gsap';
 import { computed, nextTick, onMounted, reactive, ref, watch } from 'vue';
+import { gsap, Power1 } from 'gsap';
+
 export default {
+  name: 'App',
+  components: {
+    Cards,
+    CartPage,
+  },
   setup() {
     const isTouchDevice = ref('ontouchstart' in document.documentElement);
     const movies = reactive({ data: [] });
@@ -12,6 +20,7 @@ export default {
     let timer = null;
     const isArrowLeftVisible = ref(false);
     const isAddingToCart = ref(false);
+    const isRemovingFromCart = ref(false);
     const totalPrice = computed(() =>
       cart.data
         .map((movie) => movie.price)
@@ -96,7 +105,7 @@ export default {
         left: 0,
       });
 
-      setTimeout(() => toggleLeftArrow(), 500);
+      setTimeout(() => (isArrowLeftVisible.value = false), 600);
     }
 
     function toggleCartPage() {
@@ -148,11 +157,15 @@ export default {
     }
 
     function removeFromCart(idx) {
+      if (isRemovingFromCart.value) return;
+      isRemovingFromCart.value = true;
+
       movies.data.find(
         (movie) => movie.name === cart.data[idx].name
       ).isInCart = false;
 
       cart.data.splice(idx, 1);
+      setTimeout(() => (isRemovingFromCart.value = false), 300);
       closeCartPageIfNothingInCart(1.6);
     }
 
@@ -198,41 +211,6 @@ export default {
     網頁不適合透過行動裝置瀏覽喔 : (
   </section>
   <h1 class="title">Vue.js Theater</h1>
-  <section class="movie" @wheel.prevent="horizontalScroll">
-    <section class="cards" :class="{ cartOpen: isCartOpen }">
-      <article
-        class="card"
-        v-for="(movie, idx) in movies.data"
-        :key="movie.name"
-      >
-        <div class="card-left">
-          <div class="cover" :style="getCoverStyle(movie.cover)"></div>
-        </div>
-        <div class="card-right">
-          <h2 class="name">{{ movie.name }}</h2>
-          <h4 class="genre">{{ movie.genre }}</h4>
-          <p class="description">{{ truncate(movie.description, 95) }}</p>
-          <div class="price">$ {{ thousandFormat(movie.price) }}</div>
-          <button
-            :class="['add', { inCart: movie.isInCart }]"
-            @click="addToCart(movie, idx, $event)"
-          >
-            {{ movie.isInCart ? '已在購物車' : '加入購物車' }}
-          </button>
-        </div>
-      </article>
-    </section>
-  </section>
-
-  <button class="arrow-left" v-show="isArrowLeftVisible" @click="moveToTop">
-    ←
-  </button>
-
-  <div
-    class="moving-cover"
-    :style="getCoverStyle(currentMovieCover)"
-    v-show="currentMovieCover"
-  ></div>
 
   <div class="cart" @click="toggleCartPage">
     <svg
@@ -293,28 +271,29 @@ export default {
     <span>{{ cart.data.length }}</span>
   </div>
 
-  <section class="cart-page" :class="{ cartOpen: isCartOpen }">
-    <h3 class="message" v-if="!cart.data.length">
-      你還沒將任何電影加入購物車喔 : (
-    </h3>
-    <section v-if="cart.data.length" class="panel">
-      <h2>電影購物車</h2>
-      <ul>
-        <li v-for="(movie, idx) in cart.data" :key="movie.name">
-          <div class="remove" @click="removeFromCart(idx)">✕</div>
-          <div class="thumbnail" :style="getCoverStyle(movie.cover)"></div>
-          <h3 class="name">
-            {{ movie.name }}（{{ movie.genre.replaceAll('、', ' / ') }}）
-          </h3>
-          <h3 class="price">$ {{ thousandFormat(movie.price) }}</h3>
-        </li>
-      </ul>
-      <hr v-if="cart.data.length" />
-      <h2 class="total-price" v-if="cart.data.length">
-        總計 $ {{ thousandFormat(totalPrice) }}
-      </h2>
-    </section>
-  </section>
+  <cards
+    :movies="movies"
+    :currentMovieCover="currentMovieCover"
+    :isCartOpen="isCartOpen"
+    :isArrowLeftVisible="isArrowLeftVisible"
+    :getCoverStyle="getCoverStyle"
+    :horizontalScroll="horizontalScroll"
+    :adjustCardsPos="adjustCardsPos"
+    :toggleLeftArrow="toggleLeftArrow"
+    :moveToTop="moveToTop"
+    :addToCart="addToCart"
+    :truncate="truncate"
+    :thousandFormat="thousandFormat"
+  />
+
+  <cartPage
+    :cart="cart"
+    :isCartOpen="isCartOpen"
+    :totalPrice="totalPrice"
+    :getCoverStyle="getCoverStyle"
+    :removeFromCart="removeFromCart"
+    :thousandFormat="thousandFormat"
+  />
 </template>
 
 <style lang="sass">
@@ -327,14 +306,7 @@ $mediumGrey: #bbb
 $grey: #888
 $darkGrey: #444
 $black: #111
-$coverShadow: 0 5px 25px 5px rgba(black, 0.2) // x, y, blur-radius, spread-radius, color
 $transitionTime: 0.5s
-
-@keyframes demoScrolling
-  0%
-    left: -250px
-  100%
-    left: 0
 
 ::-webkit-scrollbar
   width: 8px
@@ -360,7 +332,7 @@ html, body
 #app
   width: 100%
   height: 100%
-  background: $black
+  background-color: $black
   position: relative
 
 .title
@@ -373,120 +345,11 @@ html, body
   font-weight: bold
   pointer-events: none
 
-.movie
-  width: 100%
-  height: 100%
-  position: fixed
-  left: 50%
-  top: 50%
-  transform: translate(-50%, -50%)
-
-.cards
-  margin-left: 20%
-  height: 100%
-  display: flex
-  align-items: center
-  transition: $transitionTime, left 0s
-  animation: demoScrolling 2s ease-out
-  animation-delay: 0.5s
-  position: relative
-  &.cartOpen
-    filter: blur(10px)
-
-.card
-  margin: 0 80px
-  padding: 20px 20px
-  width: 484px
-  display: inline-flex
-  flex-shrink: 0
-  background-color: rgba(white, 0.9)
-  border-radius: 5px
-  transform: translateY(15%)
-  transition: $transitionTime
-  &:hover
-    transform: translateY(5px)
-    .cover
-      transform: translateY(-15px)
-  @media screen and (min-width: 1281px)
-    margin: 0 110px
-    transform: translateY(15%) scale(1.1)
-    &:hover
-      transform: translateY(5px) scale(1.1)
-
-.card-left
-  // flex: 1
-  .cover
-    margin-top: -50px
-    width: 198px
-    height: 264px
-    border-radius: 5px
-    box-shadow: $coverShadow
-    transition: $transitionTime
-
-.card-right
-  // flex: 2
-  margin-left: 10px
-  padding: 10px
-  .name
-    color: $darkGrey
-  .genre
-    margin: 14px 0
-    font-weight: normal
-    opacity: 0.8
-  .description
-    margin: 10px 0
-    font-size: 13px
-    letter-spacing: 0.2px
-    line-height: 1.3
-    color: $grey
-    opacity: 0.8
-  .price
-    display: inline-block
-    font-weight: 500
-  button
-    margin-left: 23px
-    padding: 7px 10px
-    font-size: 13px
-    color: rgba(white, 0.9)
-    background-color: $mediumGrey
-    border: none
-    border-radius: 50px
-    cursor: pointer
-    transition: background-color 0.8s
-    &:hover
-      color: white
-      background-color: $orange
-    &.inCart
-      background-color: $grey
-      cursor: default
-
-.arrow-left
-  width: 45px
-  height: 45px
-  position: fixed
-  right: 50px
-  bottom: 50px
-  font-size: 26px
-  color: $mediumGrey
-  background-color: transparent
-  border-radius: 50%
-  border: none
-  cursor: pointer
-  transition: color $transitionTime, background-color $transitionTime
-  &:hover
-    color: $black
-    background-color: $mediumGrey
-
-.moving-cover, .cart
+.cart
   position: fixed
   right: 50px
   top: 50px
-.moving-cover
-  width: 50px
-  height: 70px
-  background-color: #fff
-  opacity: 0
-.cart
+
   display: flex
   align-items: center
   z-index: 999
@@ -502,77 +365,4 @@ html, body
     fill: white
   span
     font-size: 20px
-
-.cart-page
-  width: 100%
-  height: 100%
-  position: absolute
-  display: flex
-  justify-content: center
-  align-items: center
-  color: $lightGrey
-  // background-image: linear-gradient(10deg, $black 0%, $black 50%, transparent 100%)
-  background-color: rgba($black, 0.9)
-  opacity: 0
-  pointer-events: none
-  transition: opacity $transitionTime
-  &.cartOpen
-    opacity: 1
-    pointer-events: initial
-
-.message
-  color: $mediumGrey
-  letter-spacing: 0.5px
-  @media screen and (min-width: 1281px)
-    transform: scale(1.1)
-
-.panel
-  width: 65%
-  max-width: 1100px
-  h2
-    margin-bottom: 30px
-  ul
-    // Scrollable window
-    max-height: 490px
-    overflow: hidden auto
-    li
-      padding: 15px 0
-      padding-right: 25px
-      display: flex
-      align-items: center
-      opacity: 0.8
-      border-radius: 5px
-      transition: $transitionTime
-      &:hover
-        background-color: rgba(white, 0.1)
-        transform: translateY(-5px)
-        .remove
-          opacity: 1
-          cursor: pointer
-      .remove
-        margin: 0 10px
-        display: flex
-        justify-content: center
-        align-items: center
-        width: 25px
-        height: 70px
-        opacity: 0
-        transition: $transitionTime
-      .thumbnail
-        margin-right: 20px
-        width: 50px
-        height: 70px
-      .name
-        font-size: 17px
-        font-weight: normal
-      .price
-        margin-left: auto
-  hr
-    margin: 20px 0
-  .total-price
-    margin: 0
-    padding-right: 25px
-    text-align: right
-  @media screen and (min-width: 1281px)
-    transform: scale(1.1)
 </style>
