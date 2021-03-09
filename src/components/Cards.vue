@@ -105,12 +105,6 @@ $black: #111
 $coverShadow: 0 5px 25px 5px rgba(black, 0.2) // x, y, blur-radius, spread-radius, color
 $transitionTime: 0.5s
 
-@keyframes demoScrolling
-  0%
-    left: -250px
-  100%
-    left: 0
-
 .movie
   width: 100%
   height: 100%
@@ -124,9 +118,8 @@ $transitionTime: 0.5s
   height: 100%
   display: flex
   align-items: center
+  animation: demoScroll 2.5s ease-out
   transition: $transitionTime, left 0s
-  animation: demoScrolling 2s ease-out
-  // animation-delay: 0.5s // TODO:
   position: relative
   &.cartOpen
     filter: blur(10px)

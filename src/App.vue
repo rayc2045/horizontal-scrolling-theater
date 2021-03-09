@@ -308,6 +308,12 @@ $darkGrey: #444
 $black: #111
 $transitionTime: 0.5s
 
+@keyframes demoScroll
+  0%
+    left: -250px
+  100%
+    left: 0
+
 ::-webkit-scrollbar
   width: 8px
 ::-webkit-scrollbar-track // Track
