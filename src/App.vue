@@ -42,8 +42,13 @@ export default {
         )
         .then((res) => {
           movies.data = res.data;
-          movies.data.forEach((movie) => (movie.isInCart = false));
           // console.log(`電影總計 ${movies.data.length} 部`);
+          for (const i in movies.data) {
+            for (const j in cart.data) {
+              if (movies.data[i].name === cart.data[j].name)
+                movies.data[i].isInCart = true;
+            }
+          }
         })
         .catch((err) => console.log(err));
     });
