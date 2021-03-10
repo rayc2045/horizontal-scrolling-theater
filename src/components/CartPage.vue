@@ -3,7 +3,7 @@ export default {
   props: {
     cart: {
       type: Object,
-      default: () => ([]),
+      default: () => [],
     },
     isCartOpen: {
       type: Boolean,
@@ -68,7 +68,10 @@ $transitionTime: 0.5s
 .cart-page
   width: 100%
   height: 100%
-  position: absolute
+  position: fixed
+  left: 50%
+  top: 50%
+  transform: translate(-50%, -50%)
   display: flex
   justify-content: center
   align-items: center

@@ -1,9 +1,10 @@
 <script>
+import { onMounted } from '@vue/runtime-core';
 export default {
   props: {
     movies: {
       type: Object,
-      default: () => ([]),
+      default: () => [],
     },
     currentMovieCover: {
       type: String,
@@ -51,6 +52,12 @@ export default {
     },
   },
   setup(props) {
+    onMounted(() => {
+      const cardsEl = document.querySelector('.cards');
+      cardsEl.classList.add('demo');
+      setTimeout(() => cardsEl.classList.remove('demo'), 2500);
+    });
+
     return {
       props,
     };
@@ -106,21 +113,17 @@ $coverShadow: 0 5px 25px 5px rgba(black, 0.2) // x, y, blur-radius, spread-radiu
 $transitionTime: 0.5s
 
 .movie
-  width: 100%
   height: 100%
-  position: fixed
-  left: 50%
-  top: 50%
-  transform: translate(-50%, -50%)
 
 .cards
-  margin-left: 20%
+  padding: 0 20%
   height: 100%
   display: flex
   align-items: center
-  animation: demoScroll 2.5s ease-out
   transition: $transitionTime, left 0s
   position: relative
+  &.demo
+    animation: demoScroll 2.5s ease-out
   &.cartOpen
     filter: blur(10px)
 
@@ -138,7 +141,10 @@ $transitionTime: 0.5s
     transform: translateY(5px)
     .cover
       transform: translateY(-15px)
-  @media screen and (min-width: 1281px)
+  @media screen and (max-width: 767px) // ≤ 767
+    margin: 0
+    transform: translateY(15%) scale(0.8)
+  @media screen and (min-width: 1281px) // ≥ 1281
     margin: 0 110px
     transform: translateY(15%) scale(1.1)
     &:hover

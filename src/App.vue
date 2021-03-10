@@ -36,6 +36,9 @@ export default {
     });
 
     onMounted(() => {
+      if (!isTouchDevice.value)
+        document.querySelector('#app').classList.add('touch-device');
+
       axios
         .get(
           'https://raw.githubusercontent.com/rayc2045/horizontal-scrolling-theater/master/src/assets/data/movie.json'
@@ -62,13 +65,17 @@ export default {
     }
 
     function horizontalScroll(e) {
-      gsap.to('.cards', {
-        duration: 0.6,
-        left: `+=${e.deltaY * 1.5}px`,
-      });
+      if (document.querySelector('.cards').classList.contains('demo')) return;
 
-      toggleLeftArrow();
-      adjustCardsPos();
+      if (!isTouchDevice.value) {
+        gsap.to('.cards', {
+          duration: 0.6,
+          left: `+=${e.deltaY * 1.5}px`,
+        });
+
+        toggleLeftArrow();
+        adjustCardsPos();
+      }
     }
 
     function adjustCardsPos() {
@@ -85,10 +92,10 @@ export default {
         });
       }
 
-      if (cardsLeft < -cardsEl.scrollWidth + cardWidth * 1.8) {
+      if (cardsLeft < -cardsEl.scrollWidth + cardWidth * 2.5) {
         gsap.to('.cards', {
           duration: 0.6,
-          left: -cardsEl.scrollWidth + cardWidth * 1.8,
+          left: -cardsEl.scrollWidth + cardWidth * 2.5,
         });
       }
     }
@@ -209,12 +216,6 @@ export default {
 </script>
 
 <template>
-  <section
-    v-if="isTouchDevice"
-    style="width: 100vw; height: 100vh; position: fixed; z-index: 9999; display: flex; justify-content: center; align-items: center; color: #eee; background-color: #222"
-  >
-    網頁不適合透過行動裝置瀏覽喔 : (
-  </section>
   <h1 class="title">Vue.js Theater</h1>
 
   <div class="cart" @click="toggleCartPage">
@@ -335,16 +336,22 @@ $transitionTime: 0.5s
   user-select: none
 
 html, body
-  height: 100%
+  height: 100vh
   font-family: 'Roboto', sans-serif
   scroll-behavior: smooth
-  overflow: hidden
 
 #app
   width: 100%
   height: 100%
+  // width: 100vh
+  // height: 100vw
+  // transform: rotate(-90deg) translateX(-100vh)
+  // transform-origin: top left
+  overflow-y: hidden
   background-color: $black
   position: relative
+  &.touch-device
+    overflow: hidden
 
 .title
   margin: 0
