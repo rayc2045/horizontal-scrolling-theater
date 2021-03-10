@@ -13,6 +13,7 @@ export default {
   },
   setup() {
     const isTouchDevice = ref('ontouchstart' in document.documentElement);
+    const isSmallSize = ref(document.body.getBoundingClientRect().width < 768);
     const movies = reactive({ data: [] });
     const cart = reactive({ data: [] });
     const currentMovieCover = ref('');
@@ -46,15 +47,19 @@ export default {
         .then((res) => {
           movies.data = res.data;
           // console.log(`電影總計 ${movies.data.length} 部`);
-          for (const i in movies.data) {
-            for (const j in cart.data) {
-              if (movies.data[i].name === cart.data[j].name)
-                movies.data[i].isInCart = true;
-            }
-          }
+          findInCart();
         })
         .catch((err) => console.log(err));
     });
+
+    function findInCart() {
+      for (const i in movies.data) {
+        for (const j in cart.data) {
+          if (movies.data[i].name === cart.data[j].name)
+            movies.data[i].isInCart = true;
+        }
+      }
+    }
 
     function getCoverStyle(url) {
       return {
@@ -193,6 +198,7 @@ export default {
 
     return {
       isTouchDevice,
+      isSmallSize,
       movies,
       cart,
       currentMovieCover,
@@ -278,6 +284,7 @@ export default {
   </div>
 
   <cards
+    :isTouchDevice="isTouchDevice"
     :movies="movies"
     :currentMovieCover="currentMovieCover"
     :isCartOpen="isCartOpen"
@@ -293,6 +300,8 @@ export default {
   />
 
   <cartPage
+    :isTouchDevice="isTouchDevice"
+    :isSmallSize="isSmallSize"
     :cart="cart"
     :isCartOpen="isCartOpen"
     :totalPrice="totalPrice"

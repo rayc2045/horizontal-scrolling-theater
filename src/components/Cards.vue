@@ -2,6 +2,10 @@
 import { onMounted } from '@vue/runtime-core';
 export default {
   props: {
+    isTouchDevice: {
+      type: Boolean,
+      default: false,
+    },
     movies: {
       type: Object,
       default: () => [],
@@ -69,7 +73,7 @@ export default {
   <section class="movie" @wheel.prevent="horizontalScroll">
     <section class="cards" :class="{ cartOpen: isCartOpen }">
       <article
-        class="card"
+        :class="['card', { hoverInteraction: !isTouchDevice }]"
         v-for="(movie, idx) in movies.data"
         :key="movie.name"
       >
@@ -137,17 +141,27 @@ $transitionTime: 0.5s
   border-radius: 5px
   transform: translateY(15%)
   transition: $transitionTime
-  &:hover
-    transform: translateY(5px)
-    .cover
-      transform: translateY(-15px)
-  @media screen and (max-width: 767px) // ≤ 767
+  &.hoverInteraction
+    &:hover
+      transform: translateY(5px)
+      .cover
+        transform: translateY(-15px)
+    button
+      &:hover
+        color: white
+        background-color: $orange
+      &.inCart
+        background-color: $grey
+        cursor: default
+  @media screen and (max-width: 767px) and (orientation: landscape) // < 768
     margin: 0
     transform: translateY(15%) scale(0.8)
-  @media screen and (min-width: 1281px) // ≥ 1281
+    &.hoverInteraction:hover
+      transform: translateY(5px) scale(0.8)
+  @media screen and (min-width: 1281px) // > 1280
     margin: 0 110px
     transform: translateY(15%) scale(1.1)
-    &:hover
+    &.hoverInteraction:hover
       transform: translateY(5px) scale(1.1)
 
 .card-left
@@ -190,9 +204,7 @@ $transitionTime: 0.5s
     border-radius: 50px
     cursor: pointer
     transition: background-color 0.8s
-    &:hover
-      color: white
-      background-color: $orange
+    // &:hover // .card.hoverInteraction button:hover
     &.inCart
       background-color: $grey
       cursor: default

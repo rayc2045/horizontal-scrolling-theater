@@ -1,6 +1,14 @@
 <script>
 export default {
   props: {
+    isTouchDevice: {
+      type: Boolean,
+      default: false,
+    },
+    isSmallSize: {
+      type: Boolean,
+      default: false,
+    },
     cart: {
       type: Object,
       default: () => [],
@@ -39,14 +47,20 @@ export default {
     <h3 class="message" v-if="!cart.data.length">
       你還沒將任何電影加入購物車喔 : (
     </h3>
-    <section v-if="cart.data.length" class="panel">
+    <section
+      v-if="cart.data.length"
+      :class="['panel', { hoverInteraction: !isTouchDevice }]"
+    >
       <h2>電影購物車</h2>
       <ul>
         <li v-for="(movie, idx) in cart.data" :key="movie.name">
           <div class="remove" @click="removeFromCart(idx)">✕</div>
           <div class="thumbnail" :style="getCoverStyle(movie.cover)"></div>
           <h3 class="name">
-            {{ movie.name }}（{{ movie.genre.replaceAll('、', ' / ') }}）
+            {{ movie.name }}
+            {{
+              isSmallSize ? '' : `（${movie.genre.replaceAll('、', ' / ')}）`
+            }}
           </h3>
           <h3 class="price">$ {{ thousandFormat(movie.price) }}</h3>
         </li>
@@ -94,8 +108,20 @@ $transitionTime: 0.5s
 .panel
   width: 65%
   max-width: 1100px
-  @media screen and (min-width: 1281px)
+  &.hoverInteraction
+    .remove
+      opacity: 0
+    li:hover
+      background-color: rgba(white, 0.1)
+      transform: translateY(-5px)
+      .remove
+        opacity: 1
+        cursor: pointer
+  @media screen and (max-width: 767px) // < 678
+    width: 90%
+  @media screen and (min-width: 1281px) // > 1280
     transform: scale(1.1)
+
 h2
   margin-bottom: 30px
 
@@ -114,12 +140,12 @@ li
   opacity: 0.8
   border-radius: 5px
   transition: $transitionTime
-  &:hover
-    background-color: rgba(white, 0.1)
-    transform: translateY(-5px)
-    .remove
-      opacity: 1
-      cursor: pointer
+  // &:hover
+  //   background-color: rgba(white, 0.1)
+  //   transform: translateY(-5px)
+  //   .remove
+  //     opacity: 1
+  //     cursor: pointer
 
 .remove
   margin: 0 10px
@@ -128,7 +154,6 @@ li
   align-items: center
   width: 25px
   height: 70px
-  opacity: 0
   transition: $transitionTime
 
 .thumbnail
