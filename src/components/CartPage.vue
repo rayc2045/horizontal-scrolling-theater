@@ -129,7 +129,9 @@ ul
   // Scrollable window
   max-height: 400px
   overflow: hidden auto
-  @media screen and (min-width: 1281px)
+  @media screen and (max-height: 449px) // height < 450
+    max-height: 190px
+  @media screen and (min-height: 767px) // height > 768
     max-height: 490px
 
 li

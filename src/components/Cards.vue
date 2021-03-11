@@ -125,7 +125,7 @@ $transitionTime: 0.5s
   display: flex
   align-items: center
   transition: $transitionTime, left 0s
-  position: relative
+  position: relative // Change left to horizontally scroll
   &.demo
     animation: demoScroll 2.5s ease-out
   &.cartOpen
@@ -215,7 +215,6 @@ $transitionTime: 0.5s
   top: 50px
   width: 50px
   height: 70px
-  background-color: #fff
   opacity: 0
 
 .arrow-left

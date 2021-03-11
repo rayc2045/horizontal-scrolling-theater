@@ -350,12 +350,7 @@ html, body
   scroll-behavior: smooth
 
 #app
-  width: 100%
   height: 100%
-  // width: 100vh
-  // height: 100vw
-  // transform: rotate(-90deg) translateX(-100vh)
-  // transform-origin: top left
   overflow-y: hidden
   background-color: $black
   position: relative
@@ -371,12 +366,13 @@ html, body
   font-size: 32px
   font-weight: bold
   pointer-events: none
+  @media screen and (max-width: 767px) // < 768
+    font-size: 28px
 
 .cart
   position: fixed
   right: 50px
   top: 50px
-
   display: flex
   align-items: center
   z-index: 999
