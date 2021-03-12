@@ -70,24 +70,24 @@ export default {
 </script>
 
 <template>
-  <section class="movie" @wheel.prevent="horizontalScroll">
-    <section class="cards" :class="{ cartOpen: isCartOpen }">
+  <section class="movie" @wheel.prevent="props.horizontalScroll($event)">
+    <section :class="['cards', { cartOpen: props.isCartOpen }]">
       <article
-        :class="['card', { hoverInteraction: !isTouchDevice }]"
-        v-for="(movie, idx) in movies.data"
+        :class="['card', { hoverInteraction: !props.isTouchDevice }]"
+        v-for="(movie, idx) in props.movies.data"
         :key="movie.name"
       >
         <div class="card-left">
-          <div class="cover" :style="getCoverStyle(movie.cover)"></div>
+          <div class="cover" :style="props.getCoverStyle(movie.cover)"></div>
         </div>
         <div class="card-right">
           <h2 class="name">{{ movie.name }}</h2>
           <h4 class="genre">{{ movie.genre }}</h4>
-          <p class="description">{{ truncate(movie.description, 95) }}</p>
-          <div class="price">$ {{ thousandFormat(movie.price) }}</div>
+          <p class="description">{{ props.truncate(movie.description, 95) }}</p>
+          <div class="price">$ {{ props.thousandFormat(movie.price) }}</div>
           <button
             :class="['add', { inCart: movie.isInCart }]"
-            @click="addToCart(movie, idx, $event)"
+            @click="props.addToCart(movie, idx, $event)"
           >
             {{ movie.isInCart ? '已在購物車' : '加入購物車' }}
           </button>
@@ -98,11 +98,15 @@ export default {
 
   <div
     class="moving-cover"
-    :style="getCoverStyle(currentMovieCover)"
-    v-show="currentMovieCover"
+    :style="props.getCoverStyle(currentMovieCover)"
+    v-show="props.currentMovieCover"
   ></div>
 
-  <button class="arrow-left" v-show="isArrowLeftVisible" @click="moveToTop">
+  <button
+    class="arrow-left"
+    v-show="props.isArrowLeftVisible"
+    @click="props.moveToTop"
+  >
     ←
   </button>
 </template>
