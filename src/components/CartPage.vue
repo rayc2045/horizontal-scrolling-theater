@@ -1,4 +1,6 @@
 <script>
+import { ref } from '@vue/reactivity';
+import { watch } from '@vue/runtime-core';
 export default {
   props: {
     isTouchDevice: {
@@ -35,39 +37,55 @@ export default {
     },
   },
   setup(props) {
+    const total = ref(props.totalPrice);
+
+    watch(() => props.totalPrice, animateNumber);
+
+    function animateNumber() {
+      const diff = ~~((props.totalPrice - total.value) * 0.15);
+      if (diff === 0) return (total.value = props.totalPrice);
+      total.value += diff;
+      window.requestAnimationFrame(animateNumber);
+      // setTimeout(() => animateNumber());
+    }
+
     return {
       props,
+      total,
     };
   },
 };
 </script>
 
 <template>
-  <section class="cart-page" :class="{ cartOpen: isCartOpen }">
-    <h3 class="message" v-if="!cart.data.length">
+  <section :class="['cart-page', { cartOpen: props.isCartOpen }]">
+    <h3 class="message" v-if="!props.cart.data.length">
       你還沒將任何電影加入購物車喔 : (
     </h3>
     <section
-      v-if="cart.data.length"
-      :class="['panel', { hoverInteraction: !isTouchDevice }]"
+      v-if="props.cart.data.length"
+      :class="['panel', { hoverInteraction: !props.isTouchDevice }]"
     >
       <h2>電影購物車</h2>
       <ul>
-        <li v-for="(movie, idx) in cart.data" :key="movie.name">
-          <div class="remove" @click="removeFromCart(idx)">✕</div>
-          <div class="thumbnail" :style="getCoverStyle(movie.cover)"></div>
+        <li v-for="(movie, idx) in props.cart.data" :key="movie.name">
+          <div class="remove" @click="props.removeFromCart(idx)">✕</div>
+          <div
+            class="thumbnail"
+            :style="props.getCoverStyle(movie.cover)"
+          ></div>
           <h3 class="name">
             {{ movie.name }}
             {{
               isSmallSize ? '' : `（${movie.genre.replaceAll('、', ' / ')}）`
             }}
           </h3>
-          <h3 class="price">$ {{ thousandFormat(movie.price) }}</h3>
+          <h3 class="price">$ {{ props.thousandFormat(movie.price) }}</h3>
         </li>
       </ul>
-      <hr v-if="cart.data.length" />
-      <h2 v-if="cart.data.length" class="total-price">
-        總計 $ {{ thousandFormat(totalPrice) }}
+      <hr v-if="props.cart.data.length" />
+      <h2 v-if="props.cart.data.length" class="total-price">
+        總計 $ {{ props.thousandFormat(total) }}
       </h2>
     </section>
   </section>
