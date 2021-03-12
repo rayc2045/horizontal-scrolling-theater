@@ -1,5 +1,5 @@
 <script>
-import { onMounted } from '@vue/runtime-core';
+import { onMounted, ref } from 'vue';
 export default {
   props: {
     isTouchDevice: {
@@ -56,14 +56,17 @@ export default {
     },
   },
   setup(props) {
+    const cardsElement = ref(null);
+
     onMounted(() => {
-      const cardsEl = document.querySelector('.cards');
+      const cardsEl = cardsElement.value;
       cardsEl.classList.add('demo');
       setTimeout(() => cardsEl.classList.remove('demo'), 2500);
     });
 
     return {
       props,
+      cardsElement,
     };
   },
 };
@@ -71,7 +74,10 @@ export default {
 
 <template>
   <section class="movie" @wheel.prevent="props.horizontalScroll($event)">
-    <section :class="['cards', { cartOpen: props.isCartOpen }]">
+    <section
+      :class="['cards', { cartOpen: props.isCartOpen }]"
+      ref="cardsElement"
+    >
       <article
         :class="['card', { hoverInteraction: !props.isTouchDevice }]"
         v-for="(movie, idx) in props.movies.data"

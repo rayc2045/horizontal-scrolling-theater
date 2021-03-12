@@ -1,6 +1,5 @@
 <script>
-import { ref } from '@vue/reactivity';
-import { watch } from '@vue/runtime-core';
+import { watch, ref } from 'vue';
 export default {
   props: {
     isTouchDevice: {
@@ -39,14 +38,14 @@ export default {
   setup(props) {
     const total = ref(props.totalPrice);
 
-    watch(() => props.totalPrice, animateNumber);
+    watch(() => props.totalPrice, animateTotal);
 
-    function animateNumber() {
+    function animateTotal() {
       const diff = ~~((props.totalPrice - total.value) * 0.15);
       if (diff === 0) return (total.value = props.totalPrice);
       total.value += diff;
-      window.requestAnimationFrame(animateNumber);
-      // setTimeout(() => animateNumber());
+      window.requestAnimationFrame(animateTotal);
+      // setTimeout(() => animateTotal());
     }
 
     return {
