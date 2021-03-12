@@ -9,7 +9,7 @@
 - 將自己收藏的 46 部藍光電影製作成 JSON [API](https://github.com/rayc2045/horizontal-scrolling-theater/blob/master/src/assets/data/movie.json)，並透過 axios 非同步資料請求
 - 使用基於 Webpack 的 [Vue CLI](https://cli.vuejs.org/) 做零配置原型建構，透過分拆 Components 進行 Vue3 模組化開發，以及使用 `props` 達成跨組件資料傳遞
 - 引入 [normalize.css](https://github.com/necolas/normalize.css/) 達到跨瀏覽器的樣式重置、使用預處理器 Sass 開發外觀，以及透過 [Scoped CSS](https://vue-loader.vuejs.org/guide/scoped-css.html#mixing-local-and-global-styles) 達到互不干擾的樣式封裝
-- 外觀設計上
+- 外觀與互動設計上
   - 載入網頁時加入水平捲動的動畫作為操作提示
   - 使用淺灰色作為電影卡片底色，持久凝視不眩光
   - 對電影標題、分類和敘述分別套用不同的文字大小、字重 (font weight) 和顏色，做出視覺層次 (visual hierarchy)
@@ -18,6 +18,7 @@
   - 加入電影到購物車後，對按鈕套用不同的內容和樣式，讓使用體驗更加直覺順暢
   - 使用 [ionicons](https://ionicons.com/) 的購物車 icon，並且在開、關購物車頁面時，切換線條、填充的版本
   - 開啟購物車時，虛化、暗化背景，添加層次和立體感
+  - 使用 Vue 的 `watch` API 監視金額加總，和結合 [`window.requestAnimationFrame()` 方法](https://developer.mozilla.org/zh-TW/docs/Web/API/window/requestAnimationFrame)，達成在新增或移除電影時，做出實時金額加總的功能 (跳動數字)
 - 借助 [GSAP](https://greensock.com/gsap/) 之力
   - 加上綁定捲動事件和設定元素 `relative` 定位，透過改變 `left` 值實現橫向捲動功能
   - 透過點擊「加入購物車」按鈕後，取得當下電影封面位置和設計移動軌跡，達成漂亮的加入購物車動畫
