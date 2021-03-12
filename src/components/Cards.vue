@@ -18,10 +18,6 @@ export default {
       type: Boolean,
       default: false,
     },
-    isArrowLeftVisible: {
-      type: Boolean,
-      default: false,
-    },
     getCoverStyle: {
       type: Function,
       default: () => {},

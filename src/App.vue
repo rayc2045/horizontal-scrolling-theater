@@ -281,7 +281,7 @@ export default {
     <span>{{ cart.data.length }}</span>
   </div>
 
-  <button class="arrow-left" v-show="isArrowLeftVisible" @click="moveToTop">
+  <button v-show="isArrowLeftVisible" class="arrow-left" @click="moveToTop">
     ←
   </button>
 
@@ -290,7 +290,6 @@ export default {
     :movies="movies"
     :currentMovieCover="currentMovieCover"
     :isCartOpen="isCartOpen"
-    :isArrowLeftVisible="isArrowLeftVisible"
     :getCoverStyle="getCoverStyle"
     :horizontalScroll="horizontalScroll"
     :adjustCardsPos="adjustCardsPos"
