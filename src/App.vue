@@ -18,10 +18,10 @@ export default {
     const cart = reactive({ data: [] });
     const currentMovieCover = ref('');
     const isCartOpen = ref(false);
-    let timer = null;
     const isArrowLeftVisible = ref(false);
-    const isAddingToCart = ref(false);
-    const isRemovingFromCart = ref(false);
+    let timer = null;
+    let isAddingToCart = false;
+    let isRemovingFromCart = false;
     const totalPrice = computed(() =>
       cart.data
         .map((movie) => movie.price)
@@ -70,7 +70,8 @@ export default {
     }
 
     function horizontalScroll(e) {
-      if (document.querySelector('.cards').classList.contains('demo')) return;
+      const cardsEl = document.querySelector('.cards');
+      if (cardsEl.classList.contains('demo')) return;
 
       if (!isTouchDevice.value) {
         gsap.to('.cards', {
@@ -85,7 +86,7 @@ export default {
 
     function adjustCardsPos() {
       const cardsEl = document.querySelector('.cards');
-      const cardsLeft = cardsEl.style.left.replace('px', '');
+      const cardsLeft = cardsEl.getBoundingClientRect().left;
       const cardWidth = document.querySelector('.card').getBoundingClientRect()
         .width;
       // const progress = Math.round(-cardsElLeft / cardsEl.scrollWidth * 100) / 100 * 100 + '%';
@@ -108,9 +109,8 @@ export default {
     function toggleLeftArrow() {
       if (isCartOpen.value) return (isArrowLeftVisible.value = false);
 
-      const cardsLeft = document
-        .querySelector('.cards')
-        .style.left.replace('px', '');
+      const cardsLeft = document.querySelector('.cards').getBoundingClientRect()
+        .left;
 
       if (cardsLeft < -800) return (isArrowLeftVisible.value = true);
       return (isArrowLeftVisible.value = false);
@@ -142,8 +142,8 @@ export default {
     }
 
     function addToCart(movie, idx, e) {
-      if (isAddingToCart.value || movies.data[idx].isInCart) return;
-      isAddingToCart.value = true;
+      if (isAddingToCart || movies.data[idx].isInCart) return;
+      isAddingToCart = true;
       currentMovieCover.value = movie.cover;
 
       // Do after DOM element refreshing
@@ -168,21 +168,21 @@ export default {
           if (timer) clearTimeout(timer);
           cart.data.push(movie);
           movies.data[idx].isInCart = true;
-          setTimeout(() => (isAddingToCart.value = false), 500);
+          setTimeout(() => (isAddingToCart = false), 500);
         }, 800);
       });
     }
 
     function removeFromCart(idx) {
-      if (isRemovingFromCart.value) return;
-      isRemovingFromCart.value = true;
+      if (isRemovingFromCart) return;
+      isRemovingFromCart = true;
 
       movies.data.find(
         (movie) => movie.name === cart.data[idx].name
       ).isInCart = false;
 
       cart.data.splice(idx, 1);
-      setTimeout(() => (isRemovingFromCart.value = false), 300);
+      setTimeout(() => (isRemovingFromCart = false), 300);
       closeCartPageIfNothingInCart(1.6);
     }
 
@@ -204,12 +204,10 @@ export default {
       currentMovieCover,
       isCartOpen,
       isArrowLeftVisible,
-      isAddingToCart,
       totalPrice,
       getCoverStyle,
       horizontalScroll,
       adjustCardsPos,
-      toggleLeftArrow,
       moveToTop,
       toggleCartPage,
       addToCart,
@@ -283,6 +281,10 @@ export default {
     <span>{{ cart.data.length }}</span>
   </div>
 
+  <button class="arrow-left" v-show="isArrowLeftVisible" @click="moveToTop">
+    ←
+  </button>
+
   <cards
     :isTouchDevice="isTouchDevice"
     :movies="movies"
@@ -292,7 +294,6 @@ export default {
     :getCoverStyle="getCoverStyle"
     :horizontalScroll="horizontalScroll"
     :adjustCardsPos="adjustCardsPos"
-    :toggleLeftArrow="toggleLeftArrow"
     :moveToTop="moveToTop"
     :addToCart="addToCart"
     :truncate="truncate"
@@ -388,4 +389,21 @@ html, body
     fill: white
   span
     font-size: 20px
+
+.arrow-left
+  width: 45px
+  height: 45px
+  position: fixed
+  right: 50px
+  bottom: 50px
+  font-size: 26px
+  color: $mediumGrey
+  background-color: transparent
+  border-radius: 50%
+  border: none
+  cursor: pointer
+  transition: color $transitionTime, background-color $transitionTime
+  &:hover
+    color: $black
+    background-color: $mediumGrey
 </style>

@@ -34,10 +34,6 @@ export default {
       type: Function,
       default: () => {},
     },
-    toggleLeftArrow: {
-      type: Function,
-      default: () => {},
-    },
     moveToTop: {
       type: Function,
       default: () => {},
@@ -107,14 +103,6 @@ export default {
     :style="props.getCoverStyle(currentMovieCover)"
     v-show="props.currentMovieCover"
   ></div>
-
-  <button
-    class="arrow-left"
-    v-show="props.isArrowLeftVisible"
-    @click="props.moveToTop"
-  >
-    ←
-  </button>
 </template>
 
 <style lang="sass" scoped>
@@ -226,21 +214,4 @@ $transitionTime: 0.5s
   width: 50px
   height: 70px
   opacity: 0
-
-.arrow-left
-  width: 45px
-  height: 45px
-  position: fixed
-  right: 50px
-  bottom: 50px
-  font-size: 26px
-  color: $mediumGrey
-  background-color: transparent
-  border-radius: 50%
-  border: none
-  cursor: pointer
-  transition: color $transitionTime, background-color $transitionTime
-  &:hover
-    color: $black
-    background-color: $mediumGrey
 </style>
