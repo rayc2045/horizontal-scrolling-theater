@@ -12,7 +12,7 @@ export default {
     },
     cart: {
       type: Object,
-      default: () => [],
+      default: () => ({}),
     },
     isCartOpen: {
       type: Boolean,

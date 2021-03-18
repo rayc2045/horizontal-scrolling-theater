@@ -8,7 +8,7 @@ export default {
     },
     movies: {
       type: Object,
-      default: () => [],
+      default: () => ({}),
     },
     currentMovieCover: {
       type: String,
