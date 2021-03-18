@@ -7,7 +7,7 @@
 > 以前就想過要做一個展示電影的頁面，這次使用 Vue 3 搭配 GSAP，並結合自己收藏的 46 部藍光電影所做成的 API 做串接，達成能夠橫向捲動的電影購物頁面。實作上，除了藉由 CSS 屬性 `relative` 搭配 GSAP 來調整元素的 `left` 值來實現橫向捲動的功能，另外在點擊「加入購物車」按鈕時，透過抓取當下電影封面位置和設計移動軌跡，做出漂亮的放入購物車動畫，以及使用 Vue 的 `watch` API 監視購物車資料，從購物車新增或移除電影時，加上購物車圖示縮小 20% 的反饋；這些在開發過程中不斷優化的互動效果，在最後整合到一起時，產生了驚艷的使用體驗。
 
 - 將自己收藏的 46 部藍光電影製作成 JSON [API](https://github.com/rayc2045/horizontal-scrolling-theater/blob/master/src/assets/data/movie.json)，透過 axios 達成非同步資料請求
-- 使用基於 Webpack 的 [Vue CLI](https://cli.vuejs.org/) 做零配置原型建構，透過分拆 Components 進行 Vue3 模組化開發，以及使用 `props` 達成跨組件資料傳遞
+- 使用基於 Webpack 的 [Vue CLI](https://cli.vuejs.org/) 做零配置原型建構，以 [Composition API](https://v3.vuejs.org/guide/composition-api-introduction.html#why-composition-api) 作為程式撰寫方式，以及透過分拆 Components 進行 Vue3 模組化開發，並使用 `props` 達成跨組件資料傳遞
 - 引入 [normalize.css](https://github.com/necolas/normalize.css/) 達到跨瀏覽器的樣式重置、使用預處理器 Sass 開發外觀，以及透過 [Scoped CSS](https://vue-loader.vuejs.org/guide/scoped-css.html#mixing-local-and-global-styles) 達到互不干擾的樣式封裝
 - 外觀與互動設計上
   - 載入網頁時加入水平捲動的動畫作為操作提示
