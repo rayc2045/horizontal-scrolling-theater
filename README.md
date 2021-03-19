@@ -1,6 +1,6 @@
 # Horizontal Scrolling Theater with Vue.js
 
-[![Photo](https://cdn.dribbble.com/users/3800131/screenshots/15248388/media/f16a9eeb6cf47b6c49cd5bf0af2150c2.png)](https://dribbble.com/raychangdesign)
+<!-- [![Photo](https://cdn.dribbble.com/users/3800131/screenshots/15248388/media/f16a9eeb6cf47b6c49cd5bf0af2150c2.png)](https://dribbble.com/raychangdesign) -->
 [![Photo](https://cdn.dribbble.com/users/3800131/screenshots/15248422/media/0c99f9e93cfb27b6d6c3bde349bd81df.png)](https://dribbble.com/raychangdesign)
 [![Photo](https://cdn.dribbble.com/users/3800131/screenshots/15248445/media/ae8d01470a0c24e09cd7c2fb58bc1289.png)](https://dribbble.com/raychangdesign)
 
@@ -17,12 +17,11 @@
   - 將鼠標碰觸互動效果以觸控設備為條件做分離，優化不同裝置上的使用體驗
   - 加入電影到購物車後，對按鈕套用不同的內容和樣式，讓使用體驗更加直覺順暢
   - 使用 [ionicons](https://ionicons.com/) 的購物車 icon，並且在開、關購物車頁面時，切換線條、填充的版本
-  - 開啟購物車時，虛化、暗化背景，添加層次和立體感
+  - 開啟購物車時，虛化、暗化背景，添加層次和立體感；而在購物車為空時，另外加上倒數計時器，1.6 秒後自動回到主畫面
   - 使用 Vue 的 `watch` API 監視金額加總，和結合 [`window.requestAnimationFrame()`](https://developer.mozilla.org/zh-TW/docs/Web/API/window/requestAnimationFrame) 方法，達成在新增或移除電影時，做出實時金額加總的功能 (跳動數字)
 - 借助 [GSAP](https://greensock.com/gsap/) 之力
   - 加上綁定捲動事件和設定元素 `relative` 定位，透過改變 `left` 值實現橫向捲動功能
   - 透過點擊「加入購物車」按鈕後，取得當下電影封面位置和設計移動軌跡，達成漂亮的加入購物車動畫
   - 使用 Vue 的 `watch` API 監視購物車資料，從購物車新增或移除電影、導致資料更新時，觸發購物車 icon 縮小 20% 的互動效果
 - 在加入電影到購物車、從購物車移除電影時，使用變數作為開關，阻擋 GSAP 動畫期間的複數操作，確保互動效果始終如期運行
-- 開啟購物車畫面而購物車為空，或是刪除電影導致購物車為空時，另外加上倒數計時器，1.6 秒後自動回到主畫面
 - 使用 [Netlify](https://www.netlify.com/) 部署網站 👉 [Horizontal Scrolling Theater](https://vuejs-theater.netlify.app/)
