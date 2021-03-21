@@ -81,6 +81,11 @@ export default {
 
         toggleLeftArrow();
         adjustCardsPos();
+
+        setTimeout(() => {
+          adjustCardsPos();
+          setTimeout(adjustCardsPos, 200);
+        }, 200);
       }
     }
 
@@ -90,18 +95,21 @@ export default {
       const cardWidth = document.querySelector('.card').getBoundingClientRect()
         .width;
       // const progress = Math.round(-cardsElLeft / cardsEl.scrollWidth * 100) / 100 * 100 + '%';
+      const [begining, end] = [0, -cardsEl.scrollWidth + cardWidth * 2.5];
+      // console.log(`${begining} | ${cardsLeft} | ${end}`);
+      if (begining > cardsLeft && cardsLeft > end) return;
 
-      if (cardsLeft > 0) {
+      if (cardsLeft > begining) {
         gsap.to('.cards', {
           duration: 0.6,
-          left: 0,
+          left: begining,
         });
       }
 
-      if (cardsLeft < -cardsEl.scrollWidth + cardWidth * 2.5) {
+      if (cardsLeft < end) {
         gsap.to('.cards', {
           duration: 0.6,
-          left: -cardsEl.scrollWidth + cardWidth * 2.5,
+          left: end,
         });
       }
     }
