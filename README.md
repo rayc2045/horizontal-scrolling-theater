@@ -5,7 +5,7 @@
 [![Photo](https://cdn.dribbble.com/users/3800131/screenshots/15248445/media/ae8d01470a0c24e09cd7c2fb58bc1289.png)](https://dribbble.com/raychangdesign)
 
 ### 簡介
-以前就想過要做一個展示電影的頁面，這次使用 Vue 3 搭配 GSAP，並結合自己收藏的 46 部藍光電影所做成的 API 做串接，達成能夠橫向捲動的電影購物頁面。實作上，除了藉由 CSS 屬性 `relative` 搭配 GSAP 來調整元素的 `left` 值來實現橫向捲動的功能，另外在點擊「加入購物車」按鈕時，透過抓取當下電影封面位置和設計移動軌跡，做出漂亮的放入購物車動畫，以及使用 Vue 的 `watch` API 監視購物車資料，從購物車新增或移除電影時，加上購物車圖示縮小 20% 的反饋；這些在開發過程中不斷優化的互動效果，在最後整合到一起時，產生了驚艷的使用體驗。[Horizontal Scrolling Theater](https://vuejs-theater.netlify.app/)
+以前就想過要做一個展示電影的頁面，這次使用 Vue 3 搭配 GSAP，並結合自己收藏的 46 部藍光電影所做成的 API 做串接，達成能夠橫向捲動的電影購物頁面。實作上，除了藉由 CSS 屬性 `relative` 搭配 GSAP 來調整元素的 `left` 值來實現橫向捲動的功能，另外在點擊「加入購物車」按鈕時，透過抓取當下電影封面位置和設計移動軌跡，做出漂亮的放入購物車動畫，以及使用 Vue 的 `watch` API 監視購物車資料，從購物車新增或移除電影時，加上購物車圖示縮小 20% 的反饋；這些在開發過程中不斷優化的互動效果，在最後整合到一起時，產生了驚艷的使用體驗。([Horizontal Scrolling Theater](https://vuejs-theater.netlify.app/))
 
 ### 外觀與互動設計
 - 加入水平捲動功能，並在載入網頁時以動畫展示作為操作提示
