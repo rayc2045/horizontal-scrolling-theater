@@ -1,8 +1,8 @@
 # Horizontal Scrolling Theater
 
 <!-- [![Photo](https://cdn.dribbble.com/users/3800131/screenshots/15248388/media/f16a9eeb6cf47b6c49cd5bf0af2150c2.png)](https://dribbble.com/raychangdesign) -->
-[![Photo](https://cdn.dribbble.com/users/3800131/screenshots/15248422/media/0c99f9e93cfb27b6d6c3bde349bd81df.png)](https://dribbble.com/raychangdesign)
-[![Photo](https://cdn.dribbble.com/users/3800131/screenshots/15248445/media/ae8d01470a0c24e09cd7c2fb58bc1289.png)](https://dribbble.com/raychangdesign)
+![Photo](https://cdn.dribbble.com/users/3800131/screenshots/15248422/media/0c99f9e93cfb27b6d6c3bde349bd81df.png)
+![Photo](https://cdn.dribbble.com/users/3800131/screenshots/15248445/media/ae8d01470a0c24e09cd7c2fb58bc1289.png)
 
 [> Horizontal Scrolling Theater](https://vuejs-theater.netlify.app/)
 
