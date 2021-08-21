@@ -4,7 +4,6 @@ specifiers:
   '@vue/cli-plugin-babel': ~4.5.0
   '@vue/cli-service': ~4.5.0
   '@vue/compiler-sfc': ^3.0.0
-  axios: ^0.21.1
   core-js: ^3.6.5
   gsap: ^3.7.1
   node-sass: ^4.12.0
@@ -12,7 +11,6 @@ specifiers:
   vue: ^3.0.0
 
 dependencies:
-  axios: 0.21.1
   core-js: 3.16.2
   gsap: 3.7.1
   vue: 3.2.4
@@ -2207,14 +2205,6 @@ packages:
     resolution: {integrity: sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==}
     dev: true
 
-  /axios/0.21.1:
-    resolution: {integrity: sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==}
-    dependencies:
-      follow-redirects: 1.14.2_debug@4.3.2
-    transitivePeerDependencies:
-      - debug
-    dev: false
-
   /babel-loader/8.2.2_be352a5a80662835a7707f972edfcfde:
     resolution: {integrity: sha512-JvTd0/D889PQBtUXJ2PXaKU/pjZDMtHA9V2ecm+eNRmmBCMR09a+fmpGTNwnJtFmFl5Ei7Vy47LjBb+L0wQ99g==}
     engines: {node: '>= 8.9'}
@@ -4076,6 +4066,7 @@ packages:
         optional: true
     dependencies:
       debug: 4.3.2
+    dev: true
 
   /for-in/1.0.2:
     resolution: {integrity: sha1-gQaNKVqBQuwKxybG4iAMMPttXoA=}

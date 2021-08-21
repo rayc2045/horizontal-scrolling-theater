@@ -1,7 +1,7 @@
 <script>
+import movieData from '@/data/movie.json';
 import Cards from '@/components/Cards';
 import CartPage from '@/components/CartPage';
-import axios from 'axios';
 import { computed, nextTick, onMounted, reactive, ref, watch } from 'vue';
 import { gsap, Power1 } from 'gsap';
 
@@ -14,7 +14,7 @@ export default {
   setup() {
     const isTouchDevice = ref('ontouchstart' in document.documentElement);
     const isSmallSize = ref(document.body.getBoundingClientRect().width < 768);
-    const movies = reactive({ data: [] });
+    const movies = reactive({ data: movieData });
     const cart = reactive({ data: [] });
     const currentMovieCover = ref('');
     const isCartOpen = ref(false);
@@ -40,16 +40,8 @@ export default {
       if (!isTouchDevice.value)
         document.querySelector('#app').classList.add('touch-device');
 
-      axios
-        .get(
-          'https://raw.githubusercontent.com/rayc2045/horizontal-scrolling-theater/master/src/assets/data/movie.json'
-        )
-        .then((res) => {
-          movies.data = res.data;
-          // console.log(`電影總計 ${movies.data.length} 部`);
-          findInCart();
-        })
-        .catch((err) => console.log(err));
+      // console.log(`電影總計 ${movies.data.length} 部`);
+      findInCart();
     });
 
     function findInCart() {
@@ -320,8 +312,7 @@ export default {
 </template>
 
 <style lang="sass">
-@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css')
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap')
+// @import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css') // Load in public/index.html
 
 $orange: #f95e5e
 $lightGrey: #eee
