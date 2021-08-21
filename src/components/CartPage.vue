@@ -26,15 +26,12 @@ export default {
       type: Function,
       default: () => {},
     },
-    removeFromCart: {
-      type: Function,
-      default: () => {},
-    },
     thousandFormat: {
       type: Function,
       default: () => {},
     },
   },
+  emits: ['remove-from-cart'],
   setup(props) {
     const total = ref(props.totalPrice);
 
@@ -68,7 +65,7 @@ export default {
       <h2>電影購物車</h2>
       <ul>
         <li v-for="(movie, idx) in props.cart.data" :key="movie.name">
-          <div class="remove" @click="props.removeFromCart(idx)">✕</div>
+          <div class="remove" @click="$emit('remove-from-cart',idx)">✕</div>
           <div
             class="thumbnail"
             :style="props.getCoverStyle(movie.cover)"

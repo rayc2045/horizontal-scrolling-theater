@@ -22,22 +22,6 @@ export default {
       type: Function,
       default: () => {},
     },
-    horizontalScroll: {
-      type: Function,
-      default: () => {},
-    },
-    adjustCardsPos: {
-      type: Function,
-      default: () => {},
-    },
-    moveToTop: {
-      type: Function,
-      default: () => {},
-    },
-    addToCart: {
-      type: Function,
-      default: () => {},
-    },
     truncate: {
       type: Function,
       default: () => {},
@@ -47,6 +31,10 @@ export default {
       default: () => {},
     },
   },
+  emits: [
+    'horizontal-scroll',
+    'add-to-cart'
+  ],
   setup(props) {
     const cardsElement = ref(null);
 
@@ -65,7 +53,7 @@ export default {
 </script>
 
 <template>
-  <section class="movie" @wheel.prevent="props.horizontalScroll($event)">
+  <section class="movie" @wheel.prevent="$emit('horizontal-scroll', $event)">
     <section
       :class="['cards', { cartOpen: props.isCartOpen }]"
       ref="cardsElement"
@@ -85,7 +73,7 @@ export default {
           <div class="price">$ {{ props.thousandFormat(movie.price) }}</div>
           <button
             :class="['add', { inCart: movie.isInCart }]"
-            @click="props.addToCart(movie, idx, $event)"
+            @click="$emit('add-to-cart', movie, idx, $event)"
           >
             {{ movie.isInCart ? '已在購物車' : '加入購物車' }}
           </button>

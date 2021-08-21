@@ -28,20 +28,18 @@ export default {
         .reduce((total, current) => total + current, 0)
     );
 
-    // () => cart.data.length
+    onMounted(() => {
+      if (!isTouchDevice.value)
+        document.querySelector('#app').classList.add('touch-device');
+      // console.log(`電影總計 ${movies.data.length} 部`);
+      findInCart();
+    });
+
     watch(cart.data, () => {
       gsap.from('.cart', {
         duration: 0.3,
         scale: 0.8,
       });
-    });
-
-    onMounted(() => {
-      if (!isTouchDevice.value)
-        document.querySelector('#app').classList.add('touch-device');
-
-      // console.log(`電影總計 ${movies.data.length} 部`);
-      findInCart();
     });
 
     function findInCart() {
@@ -207,7 +205,6 @@ export default {
       totalPrice,
       getCoverStyle,
       horizontalScroll,
-      adjustCardsPos,
       moveToTop,
       toggleCartPage,
       addToCart,
@@ -291,12 +288,10 @@ export default {
     :currentMovieCover="currentMovieCover"
     :isCartOpen="isCartOpen"
     :getCoverStyle="getCoverStyle"
-    :horizontalScroll="horizontalScroll"
-    :adjustCardsPos="adjustCardsPos"
-    :moveToTop="moveToTop"
-    :addToCart="addToCart"
     :truncate="truncate"
     :thousandFormat="thousandFormat"
+    @horizontal-scroll="horizontalScroll"
+    @add-to-cart="addToCart"
   />
 
   <cartPage
@@ -306,8 +301,8 @@ export default {
     :isCartOpen="isCartOpen"
     :totalPrice="totalPrice"
     :getCoverStyle="getCoverStyle"
-    :removeFromCart="removeFromCart"
     :thousandFormat="thousandFormat"
+    @remove-from-cart="removeFromCart"
   />
 </template>
 
