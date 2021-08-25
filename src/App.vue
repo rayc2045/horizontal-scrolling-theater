@@ -12,8 +12,8 @@ export default {
     CartPage,
   },
   setup() {
-    const isTouchDevice = ref('ontouchstart' in document.documentElement);
-    const isSmallSize = ref(document.body.getBoundingClientRect().width < 768);
+    const isTouchDevice = 'ontouchstart' in document.documentElement;
+    const isSmallSize = document.body.getBoundingClientRect().width < 768;
     const movies = reactive({ data: movieData });
     const cart = reactive({ data: [] });
     const currentMovieCover = ref('');
@@ -29,7 +29,7 @@ export default {
     );
 
     onMounted(() => {
-      if (!isTouchDevice.value)
+      if (!isTouchDevice)
         document.querySelector('#app').classList.add('touch-device');
       // console.log(`電影總計 ${movies.data.length} 部`);
       findInCart();
@@ -63,7 +63,7 @@ export default {
       const cardsEl = document.querySelector('.cards');
       if (cardsEl.classList.contains('demo')) return;
 
-      if (!isTouchDevice.value) {
+      if (!isTouchDevice) {
         gsap.to('.cards', {
           duration: 0.6,
           left: `+=${e.deltaY * 1.5}px`,
