@@ -79,10 +79,7 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-$lightGrey: #eee
-$mediumGrey: #bbb
-$black: #111
-$transitionTime: 0.5s
+@import '@/assets/style.sass'
 
 .cart-page
   width: 100%

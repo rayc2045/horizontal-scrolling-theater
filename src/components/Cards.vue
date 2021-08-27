@@ -76,13 +76,7 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-$orange: #f95e5e
-$mediumGrey: #bbb
-$grey: #888
-$darkGrey: #444
-$black: #111
-$coverShadow: 0 5px 25px 5px rgba(black, 0.2) // x, y, blur-radius, spread-radius, color
-$transitionTime: 0.5s
+@import '@/assets/style.sass'
 
 .movie
   height: 100%

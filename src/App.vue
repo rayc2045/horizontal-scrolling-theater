@@ -123,19 +123,7 @@ export default {
 </template>
 
 <style lang="sass">
-$orange: #f95e5e
-$lightGrey: #eee
-$mediumGrey: #bbb
-$grey: #888
-$darkGrey: #444
-$black: #111
-$transitionTime: 0.5s
-
-@keyframes demoScroll
-  0%
-    left: -250px
-  100%
-    left: 0
+@import '@/assets/style.sass'
 
 ::-webkit-scrollbar
   width: 8px
