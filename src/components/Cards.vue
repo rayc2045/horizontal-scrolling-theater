@@ -1,41 +1,19 @@
 <script>
 import { onMounted, ref } from 'vue';
+import {
+  isTouchDevice,
+  movies,
+  currentMovieCover,
+  isCartOpen,
+  getCoverStyle,
+  horizontalScroll,
+  addToCart,
+  truncate,
+  thousandFormat,
+} from '@/services/index';
+
 export default {
-  props: {
-    isTouchDevice: {
-      type: Boolean,
-      default: false,
-    },
-    movies: {
-      type: Object,
-      default: () => ({}),
-    },
-    currentMovieCover: {
-      type: String,
-      default: '',
-    },
-    isCartOpen: {
-      type: Boolean,
-      default: false,
-    },
-    getCoverStyle: {
-      type: Function,
-      default: () => {},
-    },
-    truncate: {
-      type: Function,
-      default: () => {},
-    },
-    thousandFormat: {
-      type: Function,
-      default: () => {},
-    },
-  },
-  emits: [
-    'horizontal-scroll',
-    'add-to-cart'
-  ],
-  setup(props) {
+  setup() {
     const cardsElement = ref(null);
 
     onMounted(() => {
@@ -45,35 +23,43 @@ export default {
     });
 
     return {
-      props,
       cardsElement,
+      isTouchDevice,
+      movies,
+      currentMovieCover,
+      isCartOpen,
+      getCoverStyle,
+      horizontalScroll,
+      addToCart,
+      truncate,
+      thousandFormat,
     };
   },
 };
 </script>
 
 <template>
-  <section class="movie" @wheel.prevent="$emit('horizontal-scroll', $event)">
+  <section class="movie" @wheel.prevent="horizontalScroll($event)">
     <section
-      :class="['cards', { cartOpen: props.isCartOpen }]"
+      :class="['cards', { cartOpen: isCartOpen }]"
       ref="cardsElement"
     >
       <article
-        :class="['card', { hoverInteraction: !props.isTouchDevice }]"
-        v-for="(movie, idx) in props.movies.data"
+        :class="['card', { hoverInteraction: !isTouchDevice }]"
+        v-for="(movie, idx) in movies.data"
         :key="movie.name"
       >
         <div class="card-left">
-          <div class="cover" :style="props.getCoverStyle(movie.cover)"></div>
+          <div class="cover" :style="getCoverStyle(movie.cover)"></div>
         </div>
         <div class="card-right">
           <h2 class="name">{{ movie.name }}</h2>
           <h4 class="genre">{{ movie.genre }}</h4>
-          <p class="description">{{ props.truncate(movie.description, 95) }}</p>
-          <div class="price">$ {{ props.thousandFormat(movie.price) }}</div>
+          <p class="description">{{ truncate(movie.description, 95) }}</p>
+          <div class="price">$ {{ thousandFormat(movie.price) }}</div>
           <button
             :class="['add', { inCart: movie.isInCart }]"
-            @click="$emit('add-to-cart', movie, idx, $event)"
+            @click="addToCart(movie, idx, $event)"
           >
             {{ movie.isInCart ? '已在購物車' : '加入購物車' }}
           </button>
@@ -83,9 +69,9 @@ export default {
   </section>
 
   <div
+    v-show="currentMovieCover"
     class="moving-cover"
-    :style="props.getCoverStyle(currentMovieCover)"
-    v-show="props.currentMovieCover"
+    :style="getCoverStyle(currentMovieCover)"
   ></div>
 </template>
 

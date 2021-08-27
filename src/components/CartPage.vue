@@ -1,37 +1,22 @@
 <script>
 import { watch, ref } from 'vue';
+import {
+  isTouchDevice,
+  isSmallSize,
+  cart,
+  isCartOpen,
+  getCoverStyle,
+  removeFromCart,
+  thousandFormat,
+} from '@/services/index';
+
 export default {
   props: {
-    isTouchDevice: {
-      type: Boolean,
-      default: false,
-    },
-    isSmallSize: {
-      type: Boolean,
-      default: false,
-    },
-    cart: {
-      type: Object,
-      default: () => ({}),
-    },
-    isCartOpen: {
-      type: Boolean,
-      default: false,
-    },
     totalPrice: {
       type: Number,
       default: 0,
     },
-    getCoverStyle: {
-      type: Function,
-      default: () => {},
-    },
-    thousandFormat: {
-      type: Function,
-      default: () => {},
-    },
   },
-  emits: ['remove-from-cart'],
   setup(props) {
     const total = ref(props.totalPrice);
 
@@ -46,29 +31,35 @@ export default {
     }
 
     return {
-      props,
       total,
+      isTouchDevice,
+      isSmallSize,
+      cart,
+      isCartOpen,
+      getCoverStyle,
+      removeFromCart,
+      thousandFormat
     };
   },
 };
 </script>
 
 <template>
-  <section :class="['cart-page', { cartOpen: props.isCartOpen }]">
-    <h3 class="message" v-if="!props.cart.data.length">
+  <section :class="['cart-page', { cartOpen: isCartOpen }]">
+    <h3 class="message" v-if="!cart.data.length">
       你還沒將任何電影加入購物車喔 : (
     </h3>
     <section
-      v-if="props.cart.data.length"
-      :class="['panel', { hoverInteraction: !props.isTouchDevice }]"
+      v-if="cart.data.length"
+      :class="['panel', { hoverInteraction: !isTouchDevice }]"
     >
       <h2>電影購物車</h2>
       <ul>
-        <li v-for="(movie, idx) in props.cart.data" :key="movie.name">
-          <div class="remove" @click="$emit('remove-from-cart',idx)">✕</div>
+        <li v-for="(movie, idx) in cart.data" :key="movie.name">
+          <div class="remove" @click="removeFromCart(idx)">✕</div>
           <div
             class="thumbnail"
-            :style="props.getCoverStyle(movie.cover)"
+            :style="getCoverStyle(movie.cover)"
           ></div>
           <h3 class="name">
             {{ movie.name }}
@@ -76,12 +67,12 @@ export default {
               isSmallSize ? '' : `（${movie.genre.replaceAll('、', ' / ')}）`
             }}
           </h3>
-          <h3 class="price">$ {{ props.thousandFormat(movie.price) }}</h3>
+          <h3 class="price">$ {{ thousandFormat(movie.price) }}</h3>
         </li>
       </ul>
-      <hr v-if="props.cart.data.length" />
-      <h2 v-if="props.cart.data.length" class="total-price">
-        總計 $ {{ props.thousandFormat(total) }}
+      <hr v-if="cart.data.length" />
+      <h2 v-if="cart.data.length" class="total-price">
+        總計 $ {{ thousandFormat(total) }}
       </h2>
     </section>
   </section>
