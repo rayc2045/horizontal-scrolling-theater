@@ -22,7 +22,7 @@
 ### 開發紀錄
 - 將自己收藏的 46 部藍光電影製作成 JSON [API](https://raw.githubusercontent.com/rayc2045/horizontal-scrolling-theater/master/src/data/movie.json)
 - 使用更安全的套件管理系統 [pnpm](https://pnpm.io/) 取代 npm，避免套件依賴所造成的安全漏洞 (security vulnerabilities)
-- 使用基於 Webpack 的 [Vue CLI](https://cli.vuejs.org/) 做零配置原型建構，以更加優雅的 [Composition API](https://v3.vuejs.org/guide/composition-api-introduction.html#why-composition-api) 作為程式撰寫方式；以及透過分拆 Components 進行模組化開發，並使用 `props` 達成跨組件資料傳遞與 `emits` 達成跨組件溝通
+- 使用基於 Webpack 的 [Vue CLI](https://cli.vuejs.org/) 做零配置原型建構，透過分拆 Components 進行模組化開發，以及受文章「[Do you really need Vuex?](https://blog.logrocket.com/do-you-really-need-vuex/)」啟發，使用更加優雅的 [Composition API](https://v3.vuejs.org/guide/composition-api-introduction.html#why-composition-api) 達到類似於 Vuex store 的跨元件共用資料功能
 - 引入 [normalize.css](https://github.com/necolas/normalize.css/) 達到跨瀏覽器的樣式重置、使用預處理器 Sass 開發外觀，以及透過 [Scoped CSS](https://vue-loader.vuejs.org/guide/scoped-css.html#mixing-local-and-global-styles) 達到互不干擾的樣式封裝
 - 將鼠標碰觸互動效果以觸控設備為條件做分離，優化不同裝置上的使用體驗
 - 使用 Vue 的 `watch` API 監視金額加總，和結合 [`window.requestAnimationFrame()`](https://developer.mozilla.org/zh-TW/docs/Web/API/window/requestAnimationFrame) 方法，達成在新增或移除電影時，做出實時金額加總的功能 (跳動數字)
