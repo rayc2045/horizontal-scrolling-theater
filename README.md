@@ -1,4 +1,4 @@
-# Horizontal Scrolling Theater
+# Horizontal Scrolling Theater｜互動效果豐富的橫向捲動電影院
 
 <!-- [![Photo](https://cdn.dribbble.com/users/3800131/screenshots/15248388/media/f16a9eeb6cf47b6c49cd5bf0af2150c2.png)](https://dribbble.com/raychangdesign) -->
 ![Photo](https://cdn.dribbble.com/users/3800131/screenshots/15248422/media/0c99f9e93cfb27b6d6c3bde349bd81df.png)
